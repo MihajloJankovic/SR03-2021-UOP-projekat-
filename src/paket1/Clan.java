@@ -1,5 +1,5 @@
-
-import java.util.*;
+package paket1;
+import java.time.LocalDate;
 
 /**
  * 

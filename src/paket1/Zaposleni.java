@@ -1,5 +1,5 @@
+package paket1;
 
-import java.util.*;
 
 /**
  * 

@@ -9,7 +9,14 @@ public class Clan extends Osoba {
     /**
      * Default constructor
      */
-    public Clan() {
+    public Clan(String ime,String prezime,String adresa,boolean pol,int tipclanarine,int brojuplacenihmeseci) {
+    	this.Ime = ime;
+    	this.Prezime = prezime;
+    	this.Adresa = adresa;
+    	this.Pol = pol;
+    	this.Aktivan = true;
+    	this.DatumPoslednjeUplate = LocalDate.now();
+    	this.BrojUplacenihMeseci = 0+brojuplacenihmeseci;
     }
 
     /**

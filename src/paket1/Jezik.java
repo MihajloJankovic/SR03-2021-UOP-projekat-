@@ -1,21 +1,10 @@
 package paket1;
 
-
-/**
- * 
- */
-public class Jezik {
-
-    /**
-     * Default constructor
-     */
-    public Jezik() {
-    }
-
-    enum level {
-    SRPSKI,
-    ENGLESKI,
-    NEMACKI
-  }
+public enum Jezik {
+	SRPSKI,
+	ENGLESKI,
+	NEMACKI,
+	FRANCUSKI,
+	RUSKI
 
 }

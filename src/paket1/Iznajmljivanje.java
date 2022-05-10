@@ -39,7 +39,7 @@ public class Iznajmljivanje {
     /**
      * 
      */
-    public Zaposleni Zaposleni;
+ 
 
  
 

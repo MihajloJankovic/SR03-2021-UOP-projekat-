@@ -17,6 +17,7 @@ public class Clan extends Osoba {
     	this.Aktivan = true;
     	this.DatumPoslednjeUplate = LocalDate.now();
     	this.BrojUplacenihMeseci = 0+brojuplacenihmeseci;
+    	this.Obrisan = false;
     }
 
     /**
@@ -43,5 +44,6 @@ public class Clan extends Osoba {
      * 
      */
     protected boolean Aktivan;
+    protected boolean Obrisan;
 
 }

@@ -6,10 +6,20 @@ package paket1;
  */
 public class Knjiga {
 
+
     /**
      * Default constructor
      */
-    public Knjiga() {
+    public Knjiga(String naslov,String orignaslov,String pisac,int godina,String opisk) {
+    	this.Naslov = naslov;
+    	this.OriginalniNaslov = orignaslov;
+    	this.ImePrezimePisca = pisac;
+    	this.GodinaObjavljivanja = godina;
+    	this.OpisKnjige = opisk;
+    	
+    	
+    	
+    	
     }
 
     /**

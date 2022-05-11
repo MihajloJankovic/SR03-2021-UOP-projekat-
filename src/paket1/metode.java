@@ -10,7 +10,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class metode {
-	static ArrayList<Zaposleni> zz = new ArrayList<>();
+	static ArrayList<Administrator> aa = new ArrayList<>();
+	static ArrayList<Bibliotekar> bb = new ArrayList<>();
 	static ArrayList<Knjiga> kk = new ArrayList<>();
 	static ArrayList<Clan> cc = new ArrayList<>();
 	static void NoviClan(String ime,String prezime,String adresa,boolean pol,int tipclanarine,int brojuplacenihmeseci) throws IOException
@@ -86,75 +87,145 @@ public class metode {
 	{
 		  BufferedReader br = new BufferedReader(new FileReader("./src/paket1/Clanovi.txt"));
 
-	  // Declaring a string variable
-	  String st;
-	  // Condition holds true till
-	  // there is character in a string
-	  while ((st = br.readLine()) != null) {
+		  // Declaring a string variable
+		  String st;
+		  // Condition holds true till
+		  // there is character in a string
+		  while ((st = br.readLine()) != null) {
 
-	     
-		
-			  System.out.println(st);
 		  
-	}
-		br.close();
+			  String [] red = st.split("\\|");
+			  for(String redd: red) {
+		            
+		        }
+			  
+			  String ime = red[0];
+			  String prezime =  red[1];
+			  String adresa =  red[2];
+			  boolean pol = Boolean.parseBoolean(red[3]); 
+			  String tipc = red[4];
+			  boolean aktivan =  Boolean.parseBoolean(red[5]); 
+			  String DATUM=   red[6];
+			  int brojum = Integer.parseInt(red[7]);
+			  int brojck = Integer.parseInt(red[8]);
+			  boolean obrisan =  Boolean.parseBoolean(red[9]); 
+			  
+			  cc.add(new Clan(ime, prezime, adresa, pol,tipc,aktivan,DATUM,brojum,brojck,obrisan));
+			 
+			  
+		}
+		  
+			br.close();
 	}
 
 	
-	static void NoviZaposleni(String ime,String prezime,String adresa,boolean pol,double plata,String Kime,String Sifra) throws IOException
+	static void NoviZaposleni(String ime,String prezime,String adresa,boolean pol,double plata,String Kime,String Sifra,int vrsta) throws IOException
 	{
-		Zaposleni Z1 = new Zaposleni(ime,prezime,adresa,pol,plata,Kime,Sifra);
-		
-		
-		BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Zaposleni.txt", true));
-	    
-	    myWriter.append(Z1.Ime+"|"+Z1.Prezime+"|"+Z1.Adresa+"|"+String.valueOf(Z1.Pol)+"|"+String.valueOf(Z1.plata)+"|"+Z1.K_Ime+"|"+Z1.Sifra+"\n");
-	    myWriter.close();
-	    System.out.println("Successfully wrote to the file.");
-	    
-	    
-	    int brojck=0;
-		int brojreda=1;
-		int idzaposlenog=0,idknjige=0;
-		  
-	    
-	    FileInputStream fstream = new FileInputStream("./src/paket1/Settings.txt");
-		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+		if(vrsta == 0)
+		{
+			 Zaposleni Z1 = new Administrator(ime,prezime,adresa,pol,plata,Kime,Sifra);
+			 BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Zaposleni.txt", true));
+			    
+			    myWriter.append(Z1.Ime+"|"+Z1.Prezime+"|"+Z1.Adresa+"|"+String.valueOf(Z1.Pol)+"|"+String.valueOf(Z1.plata)+"|"+Z1.K_Ime+"|"+Z1.Sifra+"|"+"0"+"\n");
+			    myWriter.close();
+			    System.out.println("Successfully wrote to the file.");
+			    
+			    
+			    int brojck=0;
+				int brojreda=1;
+				int idzaposlenog=0,idknjige=0;
+				  
+			    
+			    FileInputStream fstream = new FileInputStream("./src/paket1/Settings.txt");
+				BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
-		String strLine;
+				String strLine;
 
-		//Read File Line By Line
-		while ((strLine = br.readLine()) != null)   {
-			if(brojreda==1)
-			{
-				brojck=Integer.parseInt(strLine);
-			}
-			if(brojreda==2)
-			{
-			  idzaposlenog=Integer.parseInt(strLine)+1;
-			}
-			if(brojreda==3)
-			{
-			 idknjige=Integer.parseInt(strLine);
-			}
-		
-		  brojreda=brojreda+1;
-		 
+				//Read File Line By Line
+				while ((strLine = br.readLine()) != null)   {
+					if(brojreda==1)
+					{
+						brojck=Integer.parseInt(strLine);
+					}
+					if(brojreda==2)
+					{
+					  idzaposlenog=Integer.parseInt(strLine)+1;
+					}
+					if(brojreda==3)
+					{
+					 idknjige=Integer.parseInt(strLine);
+					}
+				
+				  brojreda=brojreda+1;
+				 
+				}
+				Z1.Id = idzaposlenog;
+				//Close the input stream
+				fstream.close();
+				
+				BufferedWriter myWriter1= new BufferedWriter(new FileWriter("./src/paket1/Settings.txt"));
+			    //FileWriter myWriter = new FileWriter("./src/paket1/Clanovi.txt");
+			    myWriter1.append(String.valueOf(brojck)+"\n");
+			    myWriter1.append(String.valueOf(idzaposlenog)+"\n");
+			    myWriter1.append(String.valueOf(idknjige)+"\n");
+			    myWriter1.close();
+			    System.out.println("uspesno promenjen settings");
+
+
 		}
-		Z1.Id = idzaposlenog;
-		//Close the input stream
-		fstream.close();
-		
-		BufferedWriter myWriter1= new BufferedWriter(new FileWriter("./src/paket1/Settings.txt"));
-	    //FileWriter myWriter = new FileWriter("./src/paket1/Clanovi.txt");
-	    myWriter1.append(String.valueOf(brojck)+"\n");
-	    myWriter1.append(String.valueOf(idzaposlenog)+"\n");
-	    myWriter1.append(String.valueOf(idknjige)+"\n");
-	    myWriter1.close();
-	    System.out.println("uspesno promenjen settings");
+		else
+		{
+			 Zaposleni Z1 = new Bibliotekar(ime,prezime,adresa,pol,plata,Kime,Sifra);
+			 BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Zaposleni.txt", true));
+			    
+			    myWriter.append(Z1.Ime+"|"+Z1.Prezime+"|"+Z1.Adresa+"|"+String.valueOf(Z1.Pol)+"|"+String.valueOf(Z1.plata)+"|"+Z1.K_Ime+"|"+Z1.Sifra+"|"+"1"+"\n");
+			    myWriter.close();
+			    System.out.println("Successfully wrote to the file.");
+			    
+			    
+			    int brojck=0;
+				int brojreda=1;
+				int idzaposlenog=0,idknjige=0;
+				  
+			    
+			    FileInputStream fstream = new FileInputStream("./src/paket1/Settings.txt");
+				BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+				String strLine;
+
+				//Read File Line By Line
+				while ((strLine = br.readLine()) != null)   {
+					if(brojreda==1)
+					{
+						brojck=Integer.parseInt(strLine);
+					}
+					if(brojreda==2)
+					{
+					  idzaposlenog=Integer.parseInt(strLine)+1;
+					}
+					if(brojreda==3)
+					{
+					 idknjige=Integer.parseInt(strLine);
+					}
+				
+				  brojreda=brojreda+1;
+				 
+				}
+				Z1.Id = idzaposlenog;
+				//Close the input stream
+				fstream.close();
+				
+				BufferedWriter myWriter1= new BufferedWriter(new FileWriter("./src/paket1/Settings.txt"));
+			    //FileWriter myWriter = new FileWriter("./src/paket1/Clanovi.txt");
+			    myWriter1.append(String.valueOf(brojck)+"\n");
+			    myWriter1.append(String.valueOf(idzaposlenog)+"\n");
+			    myWriter1.append(String.valueOf(idknjige)+"\n");
+			    myWriter1.close();
+			    System.out.println("uspesno promenjen settings");
 
 
-	    
+		}
+		 
 		
 	}
 	
@@ -182,7 +253,15 @@ public class metode {
 		  double plata = Double.parseDouble(red[4]); 
 		  String Kime =  red[5];
 		  String Sifra=   red[6];
-		  zz.add(new Zaposleni(ime,prezime,adresa,pol,plata,Kime,Sifra));
+		  int vrsta = Integer.parseInt(red[7]);
+		  if(vrsta==0)
+		  {
+			  aa.add(new Administrator(ime,prezime,adresa,pol,plata,Kime,Sifra));
+		  }
+		  if(vrsta==1)
+		  {
+			  bb.add(new Bibliotekar(ime,prezime,adresa,pol,plata,Kime,Sifra));
+		  }
 		 
 		  
 	}

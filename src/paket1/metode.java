@@ -14,6 +14,7 @@ public class metode {
 	static ArrayList<Bibliotekar> bb = new ArrayList<>();
 	static ArrayList<Knjiga> kk = new ArrayList<>();
 	static ArrayList<Clan> cc = new ArrayList<>();
+	static ArrayList<Primerak> pp = new ArrayList<>();
 	static void NoviClan(String ime,String prezime,String adresa,boolean pol,int tipclanarine,int brojuplacenihmeseci) throws IOException
 	{
 		Clan Clan1 = new Clan(ime, prezime, adresa, pol,tipclanarine, brojuplacenihmeseci);
@@ -274,23 +275,7 @@ public class metode {
 	{
 		
 		
-		Knjiga k1 = new Knjiga(naslov,orignaslov,pisac,godina,opisk);
-		switch(jezik)
-		{
-		case 1:k1.JezikOriginala = Jezik.ENGLESKI;break;
-		case 2:k1.JezikOriginala = Jezik.FRANCUSKI;break;
-		case 3:k1.JezikOriginala = Jezik.NEMACKI;break;
-		case 4:k1.JezikOriginala = Jezik.RUSKI;break;
-		case 5:k1.JezikOriginala = Jezik.SRPSKI;break;
-		}
-		switch(zanr)
-		{
-		case 1:k1.Zanr = Zanr.FANTAZIJA;break;
-		case 2:k1.Zanr = Zanr.KOMEDIJA;break;
-		case 3:k1.Zanr = Zanr.KRIMI;break;
-		case 4:k1.Zanr = Zanr.ROMANTIKA;break;
-		case 5:k1.Zanr = Zanr.TRAGEDIJA;break;
-		}
+		
 		
 		
 		
@@ -326,8 +311,26 @@ public class metode {
 		  brojreda=brojreda+1;
 		 
 		}
-		k1.id = idknjige;
+		Knjiga k1 = new Knjiga(naslov,orignaslov,pisac,godina,jezik,opisk,zanr,idknjige);
+		switch(jezik)
+		{
+		case 1:k1.JezikOriginala = Jezik.ENGLESKI;break;
+		case 2:k1.JezikOriginala = Jezik.FRANCUSKI;break;
+		case 3:k1.JezikOriginala = Jezik.NEMACKI;break;
+		case 4:k1.JezikOriginala = Jezik.RUSKI;break;
+		case 5:k1.JezikOriginala = Jezik.SRPSKI;break;
+		}
+		switch(zanr)
+		{
+		case 1:k1.Zanr = Zanr.FANTAZIJA;break;
+		case 2:k1.Zanr = Zanr.KOMEDIJA;break;
+		case 3:k1.Zanr = Zanr.KRIMI;break;
+		case 4:k1.Zanr = Zanr.ROMANTIKA;break;
+		case 5:k1.Zanr = Zanr.TRAGEDIJA;break;
+		}
+		
 		//Close the input stream
+		kk.add(new Knjiga(naslov,orignaslov,pisac,godina,jezik,opisk,zanr,idknjige));
 		fstream.close();
 		
 		
@@ -361,6 +364,80 @@ public class metode {
 	
 	
 	
+	}
+	static void CitajKnjgie() throws IOException
+	{
+
+		  BufferedReader br = new BufferedReader(new FileReader("./src/paket1/Knjige.txt"));
+
+	  // Declaring a string variable
+	  String st;
+	  // Condition holds true till
+	  // there is character in a string
+	  while ((st = br.readLine()) != null) {
+
+	  
+		  String [] red = st.split("\\|");
+		  for(String redd: red) {
+	            
+	        }
+		  
+		  String naslov = red[0];
+		  String onaslov =  red[1];
+		  String imepisca =  red[2];
+		  int godina = Integer.parseInt(red[3]);
+		  int jezik = Integer.parseInt(red[4]);
+		  String opis =  red[5];
+		  int zanr =  Integer.parseInt(red[6]);
+		  int id = Integer.parseInt(red[7]);
+		  
+		  kk.add(new Knjiga(naslov,onaslov,imepisca,godina,jezik,opis,zanr,id));
+		  
+	}
+	  
+		br.close();
+		
+	}
+	static void NoviPrimerak(int knjiga,int brojstr,boolean tip,int godina,int jezik,boolean iznajmljena) throws IOException
+	{
+		pp.add(new Primerak(knjiga,brojstr,tip,godina,jezik,iznajmljena));
+		BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Primerci.txt", true));
+	    
+	    myWriter.append(String.valueOf(knjiga)+"|"+String.valueOf(brojstr)+"|"+String.valueOf(tip)+"|"+String.valueOf(godina)+"|"+String.valueOf(jezik)+"|"+String.valueOf(iznajmljena)+"\n");
+	    myWriter.close();
+	    System.out.println("Successfully wrote to the file. Primerci");
+	    
+	  
+		
+	}
+	static void CitajPrimerke() throws IOException
+	{
+		 BufferedReader br = new BufferedReader(new FileReader("./src/paket1/Primerci.txt"));
+
+		  // Declaring a string variable
+		  String st;
+		  // Condition holds true till
+		  // there is character in a string
+		  while ((st = br.readLine()) != null) {
+
+		  
+			  String [] red = st.split("\\|");
+			  for(String redd: red) {
+		            
+		        }
+			  
+			  int knjiga = Integer.parseInt(red[0]);
+			  int brojstr = Integer.parseInt(red[1]);
+			  boolean tip = Boolean.parseBoolean(red[2]); 
+			  int godina = Integer.parseInt(red[3]);
+			  int jezik = Integer.parseInt(red[4]);
+			  boolean iznajmljena = Boolean.parseBoolean(red[5]); 
+			 
+			 pp.add(new Primerak(knjiga,brojstr,tip,godina,jezik,iznajmljena));
+			  
+		}
+		  
+			br.close();
 	}
 }
 

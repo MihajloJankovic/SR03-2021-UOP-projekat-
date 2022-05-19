@@ -8,13 +8,23 @@ public class Iznajmljivanje {
     /**
      * Default constructor
      */
-    public Iznajmljivanje() {
+    public Iznajmljivanje(int tip1,int zapo,Clan clan11,LocalDate Datumm,LocalDate dvracanja,int p1) {
+    	this.tip = tip1;
+    	this.zaposleni = zapo;
+    	this.clan = clan11;
+    	this.DatumIznamljivanja = Datumm;
+    	this.DatumVracanja = dvracanja;
+    	this.Primerak = p1;
+    	
+    	
     }
+  
 
     /**
      * 
      */
-    protected Zaposleni zaposleni;
+    protected int zaposleni;
+    protected int tip;
 
     /**
      * 
@@ -34,7 +44,7 @@ public class Iznajmljivanje {
     /**
      * 
      */
-    public Primerak Primerak;
+    public int Primerak;
 
     /**
      * 

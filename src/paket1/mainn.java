@@ -12,18 +12,29 @@ public class mainn {
 		metode.CitajKnjgie();
 		metode.CitajPrimerke();
 		metode.CitajZaposlene();
+		metode.citajiznajmljivanje();
 		//Citanej iz fajla i konstuisanje objekata.
 		
 		
-		
+		 metode.NoviZaposleni("mIKA","Antic","mAJKE JEVROSIME 2", false,50000,"JOVANA2","SifraSifra",0);
+		 metode.NoviZaposleni("mIKA","Antic","mAJKE JEVROSIME 2", false,50000,"JOVANA2","SifraSifra",1);
+		metode.NoviPrimerak(1, 100, false, 1990, 2, false);
+		metode.NoviClan("pera","petrovic","Fruskogorska54",true,2,6);
 		metode.NoviClan("pera","petrovic","Fruskogorska54",true,2,6); 
+		metode.NovoIznajmljivanje(1, 61, 8, 77);
+		// tip onog koji je iznajmio admin/bib     ; jedinstveni id zaposlenog ; brojck osobe; jedinstveni id primerka;
+		
+		
 		// ime prezime adresa pol:true musko false zensko 
 		 //tip clanarine 1 penzziner 2 dete 3 osoba
 		// broj meseci koje korisnik uplacuje u pocetku i ne moze biti manje od 1 .
 		// upisivanje u fajl se desava kad je korsnik kreiran .
-		metode.NoviZaposleni("mIKA","Antic","mAJKE JEVROSIME 2", false,50000,"JOVANA2","SifraSifra",1);
+		
 		metode.NovaKnjiga("Sabrana dela","Sabrana dela pere","Petar Petrovic",1990,1,"jamo davno malo dete je palo i otac je napiso knjigu.",1);
 		metode.NoviPrimerak(1, 100, false, 1990, 2, false);
+		
+
+		metode.upisiSVE();
 		
 		
 		
@@ -39,6 +50,7 @@ public class mainn {
 		System.out.println(metode.cc);
 		System.out.println(metode.kk);
 		System.out.println(metode.pp);
+		System.out.println(metode.ii);
 		
 		
 	}

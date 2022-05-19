@@ -8,7 +8,7 @@ public class Primerak {
     /**
      * Default constructor
      */
-    public Primerak(int knjiga,int brojstr,boolean tip,int godina,int jezik,boolean iznajmljena) {
+    public Primerak(int knjiga,int brojstr,boolean tip,int godina,int jezik,boolean iznajmljena,int id) {
     	
     	this.Knjiga = metode.kk.get(knjiga-1);
     	this.BrojStrana = brojstr;
@@ -23,6 +23,7 @@ public class Primerak {
 		case 5:this.JezikStampanja = Jezik.SRPSKI;break;
 		}
     	this.Iznajmljena = iznajmljena;
+    	this.oznaka =id;
     	
     	
     }
@@ -56,6 +57,7 @@ public class Primerak {
      * 
      */
     protected boolean Iznajmljena;
+    protected int oznaka;
 
     /**
      * 

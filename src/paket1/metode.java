@@ -2,11 +2,15 @@ package paket1;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class metode {
@@ -15,13 +19,14 @@ public class metode {
 	static ArrayList<Knjiga> kk = new ArrayList<>();
 	static ArrayList<Clan> cc = new ArrayList<>();
 	static ArrayList<Primerak> pp = new ArrayList<>();
+	static ArrayList<Iznajmljivanje> ii = new ArrayList<>();
 	static void NoviClan(String ime,String prezime,String adresa,boolean pol,int tipclanarine,int brojuplacenihmeseci) throws IOException
 	{
 		Clan Clan1 = new Clan(ime, prezime, adresa, pol,tipclanarine, brojuplacenihmeseci);
 		int brojck=0;
 		int brojreda=1;
 		int idzaposlenog=0,idknjige=0;
-		  
+		int idprim=0;
 		
 		FileInputStream fstream = new FileInputStream("./src/paket1/Settings.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -42,6 +47,10 @@ public class metode {
 			{
 			 idknjige=Integer.parseInt(strLine);
 			}
+			if(brojreda==4)
+			{
+			 idprim=Integer.parseInt(strLine)+1;
+			}
 		
 		  brojreda=brojreda+1;
 		 
@@ -55,6 +64,7 @@ public class metode {
 	    myWriter1.append(String.valueOf(brojck)+"\n");
 	    myWriter1.append(String.valueOf(idzaposlenog)+"\n");
 	    myWriter1.append(String.valueOf(idknjige)+"\n");
+	    myWriter1.append(String.valueOf(idprim)+"\n");
 	    myWriter1.close();
 	    System.out.println("uspesno promenjen settings");
 	    
@@ -66,15 +76,11 @@ public class metode {
 
 		 }
 	    
-		BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Clanovi.txt", true));
-	    //FileWriter myWriter = new FileWriter("./src/paket1/Clanovi.txt");
-	    myWriter.append(Clan1.Ime+"|"+Clan1.Prezime+"|"+Clan1.Adresa+"|"+String.valueOf(Clan1.Pol)+"|"+String.valueOf(tipclanarine)+"|"+String.valueOf(Clan1.Aktivan)+"|"+String.valueOf(Clan1.DatumPoslednjeUplate)+"|"+String.valueOf(Clan1.BrojUplacenihMeseci)+"|"+String.valueOf(Clan1.BrojCK)+"|"+String.valueOf(Clan1.Obrisan)+"\n");
-	    myWriter.close();
-	    System.out.println("Successfully wrote to the file.");
+		
 		
 	 
 	 
-	 
+	    cc.add(Clan1);
 	 
 	}
 	
@@ -124,18 +130,11 @@ public class metode {
 	{
 		if(vrsta == 0)
 		{
-			 Zaposleni Z1 = new Administrator(ime,prezime,adresa,pol,plata,Kime,Sifra);
-			 BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Zaposleni.txt", true));
-			    
-			    myWriter.append(Z1.Ime+"|"+Z1.Prezime+"|"+Z1.Adresa+"|"+String.valueOf(Z1.Pol)+"|"+String.valueOf(Z1.plata)+"|"+Z1.K_Ime+"|"+Z1.Sifra+"|"+"0"+"\n");
-			    myWriter.close();
-			    System.out.println("Successfully wrote to the file.");
-			    
-			    
+			 Administrator Z1 = new Administrator(ime,prezime,adresa,pol,plata,Kime,Sifra);
 			    int brojck=0;
 				int brojreda=1;
 				int idzaposlenog=0,idknjige=0;
-				  
+				int idprim=0;
 			    
 			    FileInputStream fstream = new FileInputStream("./src/paket1/Settings.txt");
 				BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -156,11 +155,16 @@ public class metode {
 					{
 					 idknjige=Integer.parseInt(strLine);
 					}
+					if(brojreda==4)
+					{
+					 idprim=Integer.parseInt(strLine)+1;
+					}
 				
 				  brojreda=brojreda+1;
 				 
 				}
-				Z1.Id = idzaposlenog;
+				Z1.oznaka = idzaposlenog;
+				aa.add(Z1);
 				//Close the input stream
 				fstream.close();
 				
@@ -169,26 +173,22 @@ public class metode {
 			    myWriter1.append(String.valueOf(brojck)+"\n");
 			    myWriter1.append(String.valueOf(idzaposlenog)+"\n");
 			    myWriter1.append(String.valueOf(idknjige)+"\n");
+			    myWriter1.append(String.valueOf(idprim)+"\n");
 			    myWriter1.close();
 			    System.out.println("uspesno promenjen settings");
+
 
 
 		}
 		else
 		{
-			 Zaposleni Z1 = new Bibliotekar(ime,prezime,adresa,pol,plata,Kime,Sifra);
-			 BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Zaposleni.txt", true));
-			    
-			    myWriter.append(Z1.Ime+"|"+Z1.Prezime+"|"+Z1.Adresa+"|"+String.valueOf(Z1.Pol)+"|"+String.valueOf(Z1.plata)+"|"+Z1.K_Ime+"|"+Z1.Sifra+"|"+"1"+"\n");
-			    myWriter.close();
-			    System.out.println("Successfully wrote to the file.");
-			    
-			    
+			 Bibliotekar Z1 = new Bibliotekar(ime,prezime,adresa,pol,plata,Kime,Sifra);
+
 			    int brojck=0;
 				int brojreda=1;
 				int idzaposlenog=0,idknjige=0;
 				  
-			    
+			    int idprim=0;
 			    FileInputStream fstream = new FileInputStream("./src/paket1/Settings.txt");
 				BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
@@ -208,11 +208,16 @@ public class metode {
 					{
 					 idknjige=Integer.parseInt(strLine);
 					}
+					if(brojreda==4)
+					{
+					 idprim=Integer.parseInt(strLine)+1;
+					}
 				
 				  brojreda=brojreda+1;
 				 
 				}
-				Z1.Id = idzaposlenog;
+				Z1.oznaka = idzaposlenog;
+				bb.add(Z1);
 				//Close the input stream
 				fstream.close();
 				
@@ -221,6 +226,7 @@ public class metode {
 			    myWriter1.append(String.valueOf(brojck)+"\n");
 			    myWriter1.append(String.valueOf(idzaposlenog)+"\n");
 			    myWriter1.append(String.valueOf(idknjige)+"\n");
+			    myWriter1.append(String.valueOf(idprim)+"\n");
 			    myWriter1.close();
 			    System.out.println("uspesno promenjen settings");
 
@@ -255,13 +261,14 @@ public class metode {
 		  String Kime =  red[5];
 		  String Sifra=   red[6];
 		  int vrsta = Integer.parseInt(red[7]);
+		  int Id = Integer.parseInt(red[8]);
 		  if(vrsta==0)
 		  {
-			  aa.add(new Administrator(ime,prezime,adresa,pol,plata,Kime,Sifra));
+			  aa.add(new Administrator(ime,prezime,adresa,pol,plata,Kime,Sifra,Id));
 		  }
 		  if(vrsta==1)
 		  {
-			  bb.add(new Bibliotekar(ime,prezime,adresa,pol,plata,Kime,Sifra));
+			  bb.add(new Bibliotekar(ime,prezime,adresa,pol,plata,Kime,Sifra,Id));
 		  }
 		 
 		  
@@ -286,7 +293,7 @@ public class metode {
 	    int brojck=0;
 		int brojreda=1;
 		int idzaposlenog=0,idknjige=0;
-		  
+		int idprim=0; 
 	    
 	    FileInputStream fstream = new FileInputStream("./src/paket1/Settings.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -306,6 +313,11 @@ public class metode {
 			if(brojreda==3)
 			{
 			 idknjige=Integer.parseInt(strLine)+1;
+			}
+			
+			if(brojreda==4)
+			{
+			 idprim=Integer.parseInt(strLine)+1;
 			}
 		
 		  brojreda=brojreda+1;
@@ -340,6 +352,7 @@ public class metode {
 	    myWriter1.append(String.valueOf(brojck)+"\n");
 	    myWriter1.append(String.valueOf(idzaposlenog)+"\n");
 	    myWriter1.append(String.valueOf(idknjige)+"\n");
+	    myWriter1.append(String.valueOf(idprim)+"\n");
 	    myWriter1.close();
 	    System.out.println("uspesno promenjen settings");
 
@@ -400,10 +413,61 @@ public class metode {
 	}
 	static void NoviPrimerak(int knjiga,int brojstr,boolean tip,int godina,int jezik,boolean iznajmljena) throws IOException
 	{
-		pp.add(new Primerak(knjiga,brojstr,tip,godina,jezik,iznajmljena));
+		 
+	    FileInputStream fstream = new FileInputStream("./src/paket1/Settings.txt");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+		 int brojck=0;
+			int brojreda=1;
+			int idzaposlenog=0,idknjige=0;
+			int idprim = 0;
+		String strLine;
+
+		//Read File Line By Line
+		while ((strLine = br.readLine()) != null)   {
+			if(brojreda==1)
+			{
+				brojck=Integer.parseInt(strLine);
+			}
+			if(brojreda==2)
+			{
+			  idzaposlenog=Integer.parseInt(strLine);
+			}
+			if(brojreda==3)
+			{
+			 idknjige=Integer.parseInt(strLine)+1;
+			}
+			if(brojreda==4)
+			{
+			 idprim=Integer.parseInt(strLine)+1;
+			}
+		
+		  brojreda=brojreda+1;
+		 
+		}
+		
+		
+		//Close the input stream
+		fstream.close();
+		
+		
+		BufferedWriter myWriter1= new BufferedWriter(new FileWriter("./src/paket1/Settings.txt"));
+	    //FileWriter myWriter = new FileWriter("./src/paket1/Clanovi.txt");
+	    myWriter1.append(String.valueOf(brojck)+"\n");
+	    myWriter1.append(String.valueOf(idzaposlenog)+"\n");
+	    myWriter1.append(String.valueOf(idknjige)+"\n");
+	    myWriter1.append(String.valueOf(idprim)+"\n");
+	    myWriter1.close();
+	    System.out.println("uspesno promenjen settings");
+
+		
+		
+		
+		
+		pp.add(new Primerak(knjiga,brojstr,tip,godina,jezik,iznajmljena,idprim));
 		BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Primerci.txt", true));
 	    
-	    myWriter.append(String.valueOf(knjiga)+"|"+String.valueOf(brojstr)+"|"+String.valueOf(tip)+"|"+String.valueOf(godina)+"|"+String.valueOf(jezik)+"|"+String.valueOf(iznajmljena)+"\n");
+	
+	    myWriter.append(String.valueOf(knjiga)+"|"+String.valueOf(brojstr)+"|"+String.valueOf(tip)+"|"+String.valueOf(godina)+"|"+String.valueOf(jezik)+"|"+String.valueOf(iznajmljena)+"|"+String.valueOf(idprim)+"\n");
 	    myWriter.close();
 	    System.out.println("Successfully wrote to the file. Primerci");
 	    
@@ -431,13 +495,195 @@ public class metode {
 			  boolean tip = Boolean.parseBoolean(red[2]); 
 			  int godina = Integer.parseInt(red[3]);
 			  int jezik = Integer.parseInt(red[4]);
-			  boolean iznajmljena = Boolean.parseBoolean(red[5]); 
+			  boolean iznajmljena = Boolean.parseBoolean(red[5]);
+			  int id = Integer.parseInt(red[6]);
 			 
-			 pp.add(new Primerak(knjiga,brojstr,tip,godina,jezik,iznajmljena));
+			 pp.add(new Primerak(knjiga,brojstr,tip,godina,jezik,iznajmljena,id));
 			  
 		}
 		  
 			br.close();
+	}
+	static void citajiznajmljivanje() throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(new FileReader("./src/paket1/Iznaj.txt"));
+			int iddd = 0;
+		  // Declaring a string variable
+		  String st;
+		  // Condition holds true till
+		  // there is character in a string
+		  while ((st = br.readLine()) != null) {
+
+		  
+			  String [] red = st.split("\\|");
+			  for(String redd: red) {
+		            
+		        }
+			  int tip1 = Integer.parseInt(red[0]);
+			  if(tip1==1)
+			  {	
+				  for( int i=0; i < aa.size();i++)
+				  {
+					  if(aa.get(i).oznaka == Integer.parseInt(red[1]) )
+					  {
+						 iddd =aa.get(i).oznaka ;
+					  }
+				  }
+				  int zapo = iddd;
+				  Clan clan11 = cc.get(Integer.parseInt(red[2])-1);
+				  String datum = red[3];
+				  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				  LocalDate Datumm = LocalDate.parse(datum, formatter);
+				  String datum2 = red[4];
+				  LocalDate dvracanja = LocalDate.parse(datum2, formatter);
+				  int p1 = Integer.parseInt(red[5]);
+				  ii.add(new Iznajmljivanje(tip1,zapo,clan11,Datumm,dvracanja,p1));
+				  
+			
+				  
+			  }
+			  if(tip1==0)
+			  {
+				  for( int i=0; i < bb.size();i++)
+				  {
+					  if(bb.get(i).oznaka == Integer.parseInt(red[1]) )
+					  {
+						 iddd =aa.get(i).oznaka ;
+					  }
+				  }
+				  int zapo =iddd; 
+				  Clan clan11 = cc.get(Integer.parseInt(red[2])-1);
+				  String datum = red[3];
+				  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				  LocalDate Datumm = LocalDate.parse(datum, formatter);
+				  String datum2 = red[4];
+				  LocalDate dvracanja = LocalDate.parse(datum2, formatter);
+				  int p1 = Integer.parseInt(red[5]);
+				  ii.add(new Iznajmljivanje(tip1,zapo,clan11,Datumm,dvracanja,p1));
+			  }
+	  
+		}
+		  
+			br.close();
+		
+		
+	}
+	
+	static void NovoIznajmljivanje(int tip1,int zapo1,int clan1,int III)
+	{	 
+		int zapo2 =0;
+		if(tip1==1)
+		  {	
+			  for( int i=0; i < aa.size();i++)
+			  {
+				  if(aa.get(i).oznaka == zapo1 )
+				  {
+					 zapo2 =aa.get(i).oznaka ;
+				  }
+				  
+			  }
+			  int zapo = zapo2;
+			  Clan clan11 = cc.get(clan1-1);
+		      LocalDate datumm = LocalDate.now();
+			  LocalDate dvracanja = datumm.plusMonths(3);
+			  int p1 = III;
+			  ii.add(new Iznajmljivanje(tip1,zapo,clan11,datumm,dvracanja,p1));
+			  
+
+		  }
+		  if(tip1==0)
+		  {
+			  for( int i=0; i < bb.size();i++)
+			  {
+				  if(bb.get(i).oznaka == zapo1  )
+				  {
+					  zapo2 =bb.get(i).oznaka ;
+				  }
+				  
+			  }
+			  int zapo = zapo2;
+			  Clan clan11 = cc.get(clan1-1);
+		      LocalDate datumm = LocalDate.now();
+			  LocalDate dvracanja = datumm.plusMonths(3);
+			  int p1 = III;
+			  ii.add(new Iznajmljivanje(tip1,zapo,clan11,datumm,dvracanja,p1));
+		  }
+
+		 
+		
+	}
+	static void upisiSVE() throws IOException
+	{
+		File file = new File("./src/paket1/Clanovi.txt");
+		PrintWriter writer = new PrintWriter(file);
+		writer.print("");
+		writer.close();
+		int tip=0;
+		for(int i = 0 ;i< cc.size();i++)
+		{
+			Clan Clan1 = cc.get(i);
+			BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Clanovi.txt", true));
+		    //FileWriter myWriter = new FileWriter("./src/paket1/Clanovi.txt");
+			if(String.valueOf(Clan1.TipClanarine)=="PENZIONER")
+			{
+				  tip = 1;
+			}
+			if(String.valueOf(Clan1.TipClanarine)=="DETE")
+			{
+				 tip = 2;
+			}
+			if(String.valueOf(Clan1.TipClanarine)=="OSOBA")
+			{
+				  tip = 3;
+			}
+		    myWriter.append(Clan1.Ime+"|"+Clan1.Prezime+"|"+Clan1.Adresa+"|"+String.valueOf(Clan1.Pol)+"|"+String.valueOf(tip)+"|"+String.valueOf(Clan1.Aktivan)+"|"+String.valueOf(Clan1.DatumPoslednjeUplate)+"|"+String.valueOf(Clan1.BrojUplacenihMeseci)+"|"+String.valueOf(Clan1.BrojCK)+"|"+String.valueOf(Clan1.Obrisan)+"\n");
+		    myWriter.close();
+		    System.out.println("Successfully wrote to the file.");
+			
+		}
+		
+
+		File file1 = new File("./src/paket1/Zaposleni.txt");
+		PrintWriter writer1 = new PrintWriter(file1);
+		writer1.print("");
+		writer1.close();
+		for(int i = 0 ;i< aa.size();i++)
+		{
+			Administrator Z1 = aa.get(i);
+			 BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Zaposleni.txt", true));
+			    
+			    myWriter.append(Z1.Ime+"|"+Z1.Prezime+"|"+Z1.Adresa+"|"+String.valueOf(Z1.Pol)+"|"+String.valueOf(Z1.plata)+"|"+Z1.K_Ime+"|"+Z1.Sifra+"|"+"0"+"|"+Z1.oznaka+"\n");
+			    myWriter.close();
+			    System.out.println("Successfully wrote to the file.");
+			    
+			
+		}
+		for(int i = 0 ;i< bb.size();i++)
+		{
+			Bibliotekar Z1 = bb.get(i);
+			 BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Zaposleni.txt", true));
+			    
+			    myWriter.append(Z1.Ime+"|"+Z1.Prezime+"|"+Z1.Adresa+"|"+String.valueOf(Z1.Pol)+"|"+String.valueOf(Z1.plata)+"|"+Z1.K_Ime+"|"+Z1.Sifra+"|"+"1"+"|"+Z1.oznaka+"\n");
+			    myWriter.close();
+			    System.out.println("Successfully wrote to the file.");
+			    
+			
+		}	
+		for(int i = 0 ;i< ii.size();i++)
+		{
+			Iznajmljivanje i1 = ii.get(i);
+			BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Iznaj.txt", true));
+		    
+			 myWriter.append(String.valueOf(i1.tip)+"|"+String.valueOf(i1.zaposleni)+"|"+String.valueOf(i1.clan.BrojCK)+"|"+String.valueOf(i1.DatumIznamljivanja)+"|"+String.valueOf(i1.DatumVracanja)+"|"+String.valueOf(i1.Primerak)+"\n");
+			 myWriter.close();
+			 System.out.println("Successfully wrote to the file.iznaj");
+			
+		}
+		
+		
+		
+		
+		
+		
 	}
 }
 

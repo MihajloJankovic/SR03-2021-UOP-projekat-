@@ -29,6 +29,6 @@ public class Zaposleni extends Osoba {
      * 
      */
     protected String Sifra;
-    protected int id;
+    protected int tip;
 
 }

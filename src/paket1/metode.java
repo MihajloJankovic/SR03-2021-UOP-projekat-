@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,6 +21,52 @@ public class metode {
 	static ArrayList<Clan> cc = new ArrayList<>();
 	static ArrayList<Primerak> pp = new ArrayList<>();
 	static ArrayList<Iznajmljivanje> ii = new ArrayList<>();
+	static ArrayList<Zanr> zanr = new ArrayList<>();
+	static ArrayList<TipClanarine> tc = new ArrayList<>();
+	static void noviZanr(String ime)
+	{
+		zanr.add(new Zanr(ime));
+	}
+	static void noviTipClanarine(String ime,double cena)
+	{
+		tc.add(new TipClanarine(ime,cena));
+	}
+	static void CitajZanrove() throws IOException
+	{
+		  BufferedReader br = new BufferedReader(new FileReader("./src/paket1/Zanrovi.txt"));
+
+		  // Declaring a string variable
+		  String st;
+		  // Condition holds true till
+		  // there is character in a string
+		  while ((st = br.readLine()) != null) {
+
+		
+			  zanr.add(new Zanr(st));
+			 
+			  
+		}
+		  
+			br.close();
+	}
+	static void CitajTipoveC() throws IOException
+	{
+		  BufferedReader br = new BufferedReader(new FileReader("./src/paket1/TipoviClnarine.txt"));
+
+		  // Declaring a string variable
+		  String st;
+		  // Condition holds true till
+		  // there is character in a string
+		  while ((st = br.readLine()) != null) {
+
+			  String [] red = st.split("\\|");
+			  tc.add(new TipClanarine(String.valueOf(red[0]),Double.valueOf(red[1])));
+			 
+			  
+		}
+		  
+			br.close();
+	}
 	static void NoviClan(String ime,String prezime,String adresa,boolean pol,int tipclanarine,int brojuplacenihmeseci) throws IOException
 	{
 		Clan Clan1 = new Clan(ime, prezime, adresa, pol,tipclanarine, brojuplacenihmeseci);
@@ -68,13 +115,7 @@ public class metode {
 	    myWriter1.close();
 	    System.out.println("uspesno promenjen settings");
 	    
-	    switch(tipclanarine)
-		 {
-		 case 1: Clan1.TipClanarine = TipClanarine.PENZIONER;break;
-		 case 2: Clan1.TipClanarine = TipClanarine.DETE;break;
-		 case 3: Clan1.TipClanarine = TipClanarine.OSOBA;break;
-
-		 }
+	    
 	    
 		
 		
@@ -110,7 +151,7 @@ public class metode {
 			  String prezime =  red[1];
 			  String adresa =  red[2];
 			  boolean pol = Boolean.parseBoolean(red[3]); 
-			  String tipc = red[4];
+			  int tipc = Integer.parseInt(red[4]);
 			  boolean aktivan =  Boolean.parseBoolean(red[5]); 
 			  String DATUM=   red[6];
 			  int brojum = Integer.parseInt(red[7]);
@@ -278,7 +319,7 @@ public class metode {
 	}
 
 	
-	static void NovaKnjiga(String naslov,String orignaslov,String pisac,int godina,int jezik,String opisk,int zanr) throws IOException
+	static void NovaKnjiga(String naslov,String orignaslov,String pisac,int godina,int jezik,String opisk,int zanrr) throws IOException
 	{
 		
 		
@@ -323,26 +364,9 @@ public class metode {
 		  brojreda=brojreda+1;
 		 
 		}
-		Knjiga k1 = new Knjiga(naslov,orignaslov,pisac,godina,jezik,opisk,zanr,idknjige);
-		switch(jezik)
-		{
-		case 1:k1.JezikOriginala = Jezik.ENGLESKI;break;
-		case 2:k1.JezikOriginala = Jezik.FRANCUSKI;break;
-		case 3:k1.JezikOriginala = Jezik.NEMACKI;break;
-		case 4:k1.JezikOriginala = Jezik.RUSKI;break;
-		case 5:k1.JezikOriginala = Jezik.SRPSKI;break;
-		}
-		switch(zanr)
-		{
-		case 1:k1.Zanr = Zanr.FANTAZIJA;break;
-		case 2:k1.Zanr = Zanr.KOMEDIJA;break;
-		case 3:k1.Zanr = Zanr.KRIMI;break;
-		case 4:k1.Zanr = Zanr.ROMANTIKA;break;
-		case 5:k1.Zanr = Zanr.TRAGEDIJA;break;
-		}
 		
 		//Close the input stream
-		kk.add(new Knjiga(naslov,orignaslov,pisac,godina,jezik,opisk,zanr,idknjige));
+		kk.add(new Knjiga(naslov,orignaslov,pisac,godina,jezik,opisk,zanrr,idknjige));
 		fstream.close();
 		
 		
@@ -362,15 +386,8 @@ public class metode {
 		
 		
 		
+	
 		
-		
-		
-		BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Knjige.txt", true));
-	    
-	    myWriter.append(k1.Naslov+"|"+k1.OriginalniNaslov+"|"+k1.ImePrezimePisca+"|"+String.valueOf(k1.GodinaObjavljivanja)+"|"+String.valueOf(jezik)+"|"+k1.OpisKnjige+"|"+String.valueOf(zanr)+"|"+String.valueOf(k1.id)+"|"+"\n");
-	    myWriter.close();
-	    System.out.println("Successfully wrote to the file.");
-	    
 	  
 	
 	
@@ -394,12 +411,20 @@ public class metode {
 		  for(String redd: red) {
 	            
 	        }
-		  
+		  int jezik=0;
 		  String naslov = red[0];
 		  String onaslov =  red[1];
 		  String imepisca =  red[2];
 		  int godina = Integer.parseInt(red[3]);
-		  int jezik = Integer.parseInt(red[4]);
+		  String jezik1 = red[4];
+		  switch(jezik1)
+			{
+			case "ENGLESKI":jezik = 1;break;
+			case "FRANCUSKI":jezik = 2;break;
+			case "NEMACKI":jezik = 3;break;
+			case "RUSKI":jezik = 4;break;
+			case "SRPSKI":jezik = 5;break;
+			}
 		  String opis =  red[5];
 		  int zanr =  Integer.parseInt(red[6]);
 		  int id = Integer.parseInt(red[7]);
@@ -617,25 +642,21 @@ public class metode {
 		PrintWriter writer = new PrintWriter(file);
 		writer.print("");
 		writer.close();
-		int tip=0;
 		for(int i = 0 ;i< cc.size();i++)
 		{
 			Clan Clan1 = cc.get(i);
-			BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Clanovi.txt", true));
 		    //FileWriter myWriter = new FileWriter("./src/paket1/Clanovi.txt");
-			if(String.valueOf(Clan1.TipClanarine)=="PENZIONER")
-			{
-				  tip = 1;
-			}
-			if(String.valueOf(Clan1.TipClanarine)=="DETE")
-			{
-				 tip = 2;
-			}
-			if(String.valueOf(Clan1.TipClanarine)=="OSOBA")
-			{
-				  tip = 3;
-			}
-		    myWriter.append(Clan1.Ime+"|"+Clan1.Prezime+"|"+Clan1.Adresa+"|"+String.valueOf(Clan1.Pol)+"|"+String.valueOf(tip)+"|"+String.valueOf(Clan1.Aktivan)+"|"+String.valueOf(Clan1.DatumPoslednjeUplate)+"|"+String.valueOf(Clan1.BrojUplacenihMeseci)+"|"+String.valueOf(Clan1.BrojCK)+"|"+String.valueOf(Clan1.Obrisan)+"\n");
+			int idzan1=0;
+			
+				for(int h = 0 ;h< tc.size();h++)
+				{
+					if(Clan1.TipClanarine.ime== tc.get(h).ime)
+					{
+						idzan1=h;break;
+					}
+				}
+			BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Clanovi.txt", true));
+		    myWriter.append(Clan1.Ime+"|"+Clan1.Prezime+"|"+Clan1.Adresa+"|"+String.valueOf(Clan1.Pol)+"|"+String.valueOf(idzan1)+"|"+String.valueOf(Clan1.Aktivan)+"|"+String.valueOf(Clan1.DatumPoslednjeUplate)+"|"+String.valueOf(Clan1.BrojUplacenihMeseci)+"|"+String.valueOf(Clan1.BrojCK)+"|"+String.valueOf(Clan1.Obrisan)+"\n");
 		    myWriter.close();
 		    System.out.println("Successfully wrote to the file.");
 			
@@ -668,6 +689,10 @@ public class metode {
 			    
 			
 		}	
+		File file11 = new File("./src/paket1/Iznaj.txt");
+		PrintWriter writer11 = new PrintWriter(file11);
+		writer11.print("");
+		writer11.close();
 		for(int i = 0 ;i< ii.size();i++)
 		{
 			Iznajmljivanje i1 = ii.get(i);
@@ -678,9 +703,60 @@ public class metode {
 			 System.out.println("Successfully wrote to the file.iznaj");
 			
 		}
-		
-		
-		
+		File file111 = new File("./src/paket1/Zanrovi.txt");
+		PrintWriter writer111 = new PrintWriter(file111);
+		writer111.print("");
+		writer111.close();
+		for(int i = 0 ;i< zanr.size();i++)
+		{
+			Zanr i1 = zanr.get(i);
+			BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Zanrovi.txt", true));
+		    
+			 myWriter.append(i1.Zanr+"\n");
+			 myWriter.close();
+			 System.out.println("Successfully wrote to the file.iznaj");
+			
+		}
+		File file2 = new File("./src/paket1/Knjige.txt");
+		PrintWriter writer1111 = new PrintWriter(file2);
+		writer1111.print("");
+		writer1111.close();
+		int idzan=0;
+		for(int i = 0 ;i< zanr.size();i++)
+		{
+			Knjiga i1 = kk.get(i);
+			for(int g = 0 ;g< zanr.size();g++)
+			{
+				if(zanr.get(g).Zanr==i1.Zanr.Zanr)
+				{
+					idzan=g;
+				}
+			}
+			
+			BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Knjige.txt", true));
+		    
+			myWriter.append(i1.Naslov+"|"+i1.OriginalniNaslov+"|"+i1.ImePrezimePisca+"|"+String.valueOf(i1.GodinaObjavljivanja)+"|"+String.valueOf(i1.JezikOriginala)+"|"+i1.OpisKnjige+"|"+String.valueOf(idzan)+"|"+String.valueOf(i1.id)+"|"+"\n");
+			 myWriter.close();
+			 System.out.println("Successfully wrote to the file.iznaj");
+			
+		}
+		File file3 = new File("./src/paket1/TipoviClnarine.txt");
+		PrintWriter writer11111 = new PrintWriter(file3);
+		writer11111.print("");
+		writer11111.close();
+		for(int i = 0 ;i< tc.size();i++)
+		{
+			TipClanarine Z1 = tc.get(i);
+			 BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/TipoviClnarine.txt", true));
+			    
+			    myWriter.append(Z1.ime+"|"+String.valueOf(Z1.cena)+"\n");
+			    myWriter.close();
+			    System.out.println("Successfully wrote to the file.");
+			    
+			
+		}	
+
+	 
 		
 		
 		

@@ -7,7 +7,8 @@ public class mainn {
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		
-		
+		metode.CitajZanrove();
+		metode.CitajTipoveC();
 		metode.CitajClanove();
 		metode.CitajKnjgie();
 		metode.CitajPrimerke();
@@ -21,7 +22,12 @@ public class mainn {
 		metode.NoviPrimerak(1, 100, false, 1990, 2, false);
 		metode.NoviClan("pera","petrovic","Fruskogorska54",true,2,6);
 		metode.NoviClan("pera","petrovic","Fruskogorska54",true,2,6); 
-		metode.NovoIznajmljivanje(1, 61, 8, 77);
+		metode.NovoIznajmljivanje(1, 61, 1, 77);
+		
+		//metode.noviTipClanarine("Vip clan premium", 500);
+		//metode.noviZanr("komedija");
+		// ove dve metode su samo pokazne...
+		
 		// tip onog koji je iznajmio admin/bib     ; jedinstveni id zaposlenog ; brojck osobe; jedinstveni id primerka;
 		
 		

@@ -10,7 +10,7 @@ public class Knjiga {
     /**
      * Default constructor
      */
-    public Knjiga(String naslov,String orignaslov,String pisac,int godina,int jezik,String opisk,int zanr,int id) {
+    public Knjiga(String naslov,String orignaslov,String pisac,int godina,int jezik,String opisk,int zanrr,int id) {
     	this.Naslov = naslov;
     	this.OriginalniNaslov = orignaslov;
     	this.ImePrezimePisca = pisac;
@@ -24,16 +24,7 @@ public class Knjiga {
 		case 4:this.JezikOriginala = Jezik.RUSKI;break;
 		case 5:this.JezikOriginala = Jezik.SRPSKI;break;
 		}
-		switch(zanr)
-		{
-		case 1:this.Zanr = Zanr.FANTAZIJA;break;
-		case 2:this.Zanr = Zanr.KOMEDIJA;break;
-		case 3:this.Zanr = Zanr.KRIMI;break;
-		case 4:this.Zanr = Zanr.ROMANTIKA;break;
-		case 5:this.Zanr = Zanr.TRAGEDIJA;break;
-		}
-    	
-    	
+    	this.Zanr = metode.zanr.get(zanrr);
     	
     	
     }

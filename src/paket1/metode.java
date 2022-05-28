@@ -23,6 +23,11 @@ public class metode {
 	static ArrayList<Iznajmljivanje> ii = new ArrayList<>();
 	static ArrayList<Zanr> zanr = new ArrayList<>();
 	static ArrayList<TipClanarine> tc = new ArrayList<>();
+	static int templogin =0;
+	static void pss()
+	{
+		System.out.println(templogin);
+	}
 	static void noviZanr(String ime)
 	{
 		zanr.add(new Zanr(ime));
@@ -755,12 +760,13 @@ public class metode {
 			    
 			
 		}	
-
+	
 	 
 		
 		
 		
 	}
+	
 }
 
 

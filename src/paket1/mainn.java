@@ -3,6 +3,7 @@ package paket1;
 import java.io.IOException;
 
 public class mainn {
+	
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub

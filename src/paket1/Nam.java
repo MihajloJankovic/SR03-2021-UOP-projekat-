@@ -21,6 +21,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+
+
 public class Nam extends javax.swing.JFrame {
 
   
@@ -37,34 +39,87 @@ public class Nam extends javax.swing.JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu = new JMenu("New menu");
+		JMenu mnNewMenu = new JMenu("Users");
 		menuBar.add(mnNewMenu);
 		
-		JMenu mnNewMenu_1 = new JMenu("New menu");
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New User");
+		mnNewMenu.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Show List");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				ClanoviPregled cpp = new ClanoviPregled();
+				cpp.setVisible(true);
+			}
+		});
+		mnNewMenu.add(mntmNewMenuItem_2);
+		
+		JMenu mnNewMenu_1 = new JMenu("Staff");
 		menuBar.add(mnNewMenu_1);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
+		JMenuItem mntmNewMenuItem = new JMenuItem("Add Administrator");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		mnNewMenu_1.add(mntmNewMenuItem);
 		
-		JMenu mnNewMenu_2 = new JMenu("New menu");
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Add Librarian");
+		mnNewMenu_1.add(mntmNewMenuItem_3);
+		
+		JMenu mnNewMenu_2 = new JMenu("Library");
+		mnNewMenu_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		menuBar.add(mnNewMenu_2);
 		SpringLayout springLayout = new SpringLayout();
 		getContentPane().setLayout(springLayout);
 		
 		JButton btnNewButton_1 = new JButton("Login");
+		menuBar.hide();
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoginDialog loginDlg = new LoginDialog(null);
                 loginDlg.setVisible(true);
                 if(loginDlg.isSucceeded()){
                 	btnNewButton_1.hide();
-                	
+                	menuBar.show();   
+                	for(int i = 0 ;i< metode.aa.size();i++)
+            		{
+            			Administrator Z1 = metode.aa.get(i);
+            			
+            			if (Z1.oznaka == metode.templogin) {
+            				showAInter();
+            				
+            	        }
+            			    
+            			
+            		}
+            		for(int i = 0 ;i< metode.bb.size();i++)
+            		{
+            			Bibliotekar Z1 = metode.bb.get(i);
+            			if (Z1.oznaka == metode.templogin) {
+            				showBInter();
+            	        }
+            			
+            		}
                 	
                 }
+				
+			}
+
+			private void showBInter() {
+				// TODO Auto-generated method stub
+				
+				
+				
+			}
+
+			private void showAInter() {
+				// TODO Auto-generated method stub
+				
 				
 			}
 		});
@@ -96,6 +151,8 @@ public class Nam extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
     	 mainn.main(args);;
+    	
+    	 
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -118,6 +175,9 @@ public class Nam extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Nam().setVisible(true);
+                
+                
+                
             }
         });
     }

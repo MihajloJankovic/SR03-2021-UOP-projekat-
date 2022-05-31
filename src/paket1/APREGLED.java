@@ -19,7 +19,7 @@ import javax.swing.JMenuItem;
 
 
 
-public class ClanoviPregled extends JDialog {
+public class APREGLED extends JDialog {
 
 	/**
 	 * 
@@ -34,9 +34,9 @@ public class ClanoviPregled extends JDialog {
 	private final JButton btnNewButton = new JButton("Delete");
 	private final JButton btnNewButton_1 = new JButton("Edit");
 	
-	public ClanoviPregled() {
+	public APREGLED() {
 		setModal(true);
-		setTitle("Clanovi");
+		setTitle("Adminstrators");
 		setSize(500, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -57,11 +57,11 @@ public class ClanoviPregled extends JDialog {
 		mainToolbar.add(btnNewButton_1);
 	
 	
-		String[] zaglavlja = new String[] {"Name", "Surname", "Adress","Gender","Card number","Number of paid months","date of last payment","Membership Type","Active","Deleted"};
+		String[] zaglavlja = new String[] {"Name", "Surname", "Adress","Gender","Login name","Password","income","ID","Active","Deleted"};
 		Object[][] sadrzaj = new Object[metode.cc.size()][zaglavlja.length];
 		
-		for(int i=0; i<metode.cc.size(); i++) {
-			Clan Clan1 = metode.cc.get(i);
+		for(int i=0; i<metode.aa.size(); i++) {
+			Administrator Clan1 = metode.aa.get(i);
 			sadrzaj[i][0] = Clan1.Ime;
 			sadrzaj[i][1] = Clan1.Prezime;
 			sadrzaj[i][2] = Clan1.Adresa;
@@ -73,12 +73,11 @@ public class ClanoviPregled extends JDialog {
 			{
 				sadrzaj[i][3] = "Female";
 			}
-			sadrzaj[i][4] = String.valueOf(Clan1.BrojCK);
-			sadrzaj[i][5] = String.valueOf(Clan1.BrojUplacenihMeseci);
-			sadrzaj[i][6] = String.valueOf(Clan1.DatumPoslednjeUplate);
-			sadrzaj[i][7] = Clan1.TipClanarine.ime;
-			sadrzaj[i][8] = Clan1.Aktivan;
-			sadrzaj[i][9] = Clan1.Obrisan;
+			sadrzaj[i][4] = String.valueOf(Clan1.K_Ime);
+			sadrzaj[i][5] = String.valueOf(Clan1.Sifra);
+			sadrzaj[i][6] = String.valueOf(Clan1.plata);
+			sadrzaj[i][7] = String.valueOf(Clan1.oznaka);
+			
 			
 		}
 		

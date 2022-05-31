@@ -51,6 +51,7 @@ public class Nam extends javax.swing.JFrame {
 				
 				ClanoviPregled cpp = new ClanoviPregled();
 				cpp.setVisible(true);
+				cpp.setModal(true);
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_2);
@@ -67,6 +68,35 @@ public class Nam extends javax.swing.JFrame {
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Add Librarian");
 		mnNewMenu_1.add(mntmNewMenuItem_3);
+		
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Show Administrators");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				APREGLED cppp = new APREGLED();
+				cppp.setVisible(true);
+				
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_4);
+		
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Show Librarians");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BPREGLED cppp = new BPREGLED();
+				cppp.setVisible(true);
+				cppp.setModal(true);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_5);
+		
+		JMenu mnNewMenu_3 = new JMenu("Books");
+		menuBar.add(mnNewMenu_3);
+		
+		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Add book");
+		mnNewMenu_3.add(mntmNewMenuItem_6);
+		
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Show books");
+		mnNewMenu_3.add(mntmNewMenuItem_7);
 		
 		JMenu mnNewMenu_2 = new JMenu("Library");
 		mnNewMenu_2.addActionListener(new ActionListener() {
@@ -180,6 +210,7 @@ public class Nam extends javax.swing.JFrame {
                 
             }
         });
+        metode.upisiSVE();
     }
 }
 

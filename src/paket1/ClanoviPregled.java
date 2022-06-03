@@ -14,12 +14,18 @@ import javax.swing.JTable;
 import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+
+
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 
 
-public class ClanoviPregled extends JDialog {
+public class ClanoviPregled extends JFrame {
 
 	/**
 	 * 
@@ -30,12 +36,12 @@ public class ClanoviPregled extends JDialog {
 	private JButton btnDelete = new JButton();
 	
 	private DefaultTableModel tableModel;
-	private JTable kompozicijeTabela;
+	private JTable ttt;
 	private final JButton btnNewButton = new JButton("Delete");
 	private final JButton btnNewButton_1 = new JButton("Edit");
 	
 	public ClanoviPregled() {
-		setModal(true);
+		
 		setTitle("Clanovi");
 		setSize(500, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -47,13 +53,27 @@ public class ClanoviPregled extends JDialog {
 	private void initGUI() {
 		
 		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int red = ttt.getSelectedRow();
+				if(red == -1) {
+					JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
+				}else {
+					String ID = tableModel.getValueAt(red, 4).toString();
+					Clan pera = metode.cc.get(red);
+					ClanoviF df = new ClanoviF(pera);
+					
+				}
+				
+			}
+		});
 		
 		mainToolbar.add(btnEdit);
 		
 		mainToolbar.add(btnNewButton);
 		mainToolbar.add(btnDelete);
 		getContentPane().add(mainToolbar, BorderLayout.NORTH);
-		
+	
 		mainToolbar.add(btnNewButton_1);
 	
 	
@@ -83,17 +103,23 @@ public class ClanoviPregled extends JDialog {
 		}
 		
 		tableModel = new DefaultTableModel(sadrzaj, zaglavlja);
-		kompozicijeTabela = new JTable(tableModel);
+		ttt = new JTable(tableModel);
 		
-		kompozicijeTabela.setRowSelectionAllowed(true);
-		kompozicijeTabela.setColumnSelectionAllowed(false);
-		kompozicijeTabela.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		kompozicijeTabela.setDefaultEditor(Object.class, null);
-		kompozicijeTabela.getTableHeader().setReorderingAllowed(false);
+		ttt.setRowSelectionAllowed(true);
+		ttt.setColumnSelectionAllowed(false);
+		ttt.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		ttt.setDefaultEditor(Object.class, null);
+		ttt.getTableHeader().setReorderingAllowed(false);
 		
-		JScrollPane scrollPane = new JScrollPane(kompozicijeTabela);
+		JScrollPane scrollPane = new JScrollPane(ttt);
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
+		
+		
+		
+		
 	}
 	
-	private void initActions() {}
+	private void initActions() {
+		
+	}
 }

@@ -51,7 +51,7 @@ public class Nam extends javax.swing.JFrame {
 				
 				ClanoviPregled cpp = new ClanoviPregled();
 				cpp.setVisible(true);
-				cpp.setModal(true);
+				
 			}
 		});
 		mnNewMenu.add(mntmNewMenuItem_2);

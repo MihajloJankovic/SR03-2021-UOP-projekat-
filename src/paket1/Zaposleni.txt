@@ -1,7 +1,7 @@
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA|123|0|1
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|0|3
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|0|5
-mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|0|7
+Mihajlo|Jnkovic|aaaa|false|300.3245|aaaa|aaaa|0|7
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|0|9
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|0|11
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|0|13
@@ -44,7 +44,7 @@ mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|0|85
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|0|87
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|1|2
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|1|4
-mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|1|6
+sfhg|hfshsfh|hfshsh|false|1111.0|ssss|ssss|1|6
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|1|8
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|1|10
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|1|12

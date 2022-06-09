@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -15,11 +15,15 @@ import javax.swing.JToolBar;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 
 
-public class BPREGLED extends JDialog {
+public class BPREGLED extends JFrame {
 
 	/**
 	 * 
@@ -35,7 +39,7 @@ public class BPREGLED extends JDialog {
 	private final JButton btnNewButton_1 = new JButton("Edit");
 	
 	public BPREGLED() {
-		setModal(true);
+		
 		setTitle("Librarians");
 		setSize(500, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -53,11 +57,33 @@ public class BPREGLED extends JDialog {
 		mainToolbar.add(btnNewButton);
 		mainToolbar.add(btnDelete);
 		getContentPane().add(mainToolbar, BorderLayout.NORTH);
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int red = kompozicijeTabela.getSelectedRow();
+				if(red == -1) {
+					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
+				}else {
+					String ID = tableModel.getValueAt(red, 7).toString();
+					int iz = Integer.parseInt(ID);
+					for(int i=0 ;i<metode.bb.size();i++)
+					{
+						Bibliotekar temp = metode.bb.get(i);
+						if(temp.oznaka==iz)
+						{
+							ZaposleniFF ssd = new ZaposleniFF(temp);
+						}
+					}
+	
+					
+					
+				}
+			}
+		});
 		
 		mainToolbar.add(btnNewButton_1);
 	
 	
-		String[] zaglavlja = new String[] {"Name", "Surname", "Adress","Gender","Login name","Password","income","ID"};
+		String[] zaglavlja = new String[] {"Name", "Surname", "Adress","Gender","UserName","Password","Salary","ID"};
 		Object[][] sadrzaj = new Object[metode.cc.size()][zaglavlja.length];
 		
 		for(int i=0; i<metode.bb.size(); i++) {

@@ -89,7 +89,7 @@ public class Nam extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 				BPREGLED cppp = new BPREGLED();
 				cppp.setVisible(true);
-				cppp.setModal(true);
+				
 			}
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_5);
@@ -108,7 +108,34 @@ public class Nam extends javax.swing.JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
+		JMenu mnNewMenu_4 = new JMenu("Genre");
+		menuBar.add(mnNewMenu_4);
+		
+		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Add");
+		mnNewMenu_4.add(mntmNewMenuItem_8);
+		
+		JMenu mnNewMenu_5 = new JMenu("Membership type");
+		menuBar.add(mnNewMenu_5);
+		
+		JMenuItem mntmNewMenuItem_9 = new JMenuItem("add");
+		mnNewMenu_5.add(mntmNewMenuItem_9);
+		
+		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Show List");
+		mnNewMenu_5.add(mntmNewMenuItem_10);
+		
+		JMenu mnNewMenu_6 = new JMenu("Rents");
+		menuBar.add(mnNewMenu_6);
+		
+		JMenuItem mntmNewMenuItem_11 = new JMenuItem("New");
+		mnNewMenu_6.add(mntmNewMenuItem_11);
+		
+		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Show List");
+		mnNewMenu_6.add(mntmNewMenuItem_12);
 		menuBar.add(mnNewMenu_2);
+		
+		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Edit Info");
+		mnNewMenu_2.add(mntmNewMenuItem_13);
 		SpringLayout springLayout = new SpringLayout();
 		getContentPane().setLayout(springLayout);
 		

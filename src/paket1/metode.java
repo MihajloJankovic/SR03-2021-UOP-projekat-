@@ -72,7 +72,7 @@ public class metode {
 		  
 			br.close();
 	}
-	static void NoviClan(String ime,String prezime,String adresa,boolean pol,int tipclanarine,int brojuplacenihmeseci) throws IOException
+	static void NoviClan(String ime,String prezime,String adresa,boolean pol,TipClanarine tipclanarine,int brojuplacenihmeseci) throws IOException
 	{
 		Clan Clan1 = new Clan(ime, prezime, adresa, pol,tipclanarine, brojuplacenihmeseci);
 		int brojck=0;

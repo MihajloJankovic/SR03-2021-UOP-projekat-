@@ -10,11 +10,11 @@ public class Clan extends Osoba {
     /**
      * Default constructor
      */
-    public Clan(String ime,String prezime,String adresa,boolean pol,int tipclanarine,int brojuplacenihmeseci) {
+    public Clan(String ime,String prezime,String adresa,boolean pol,TipClanarine tipclanarine,int brojuplacenihmeseci) {
     	this.Ime = ime;
     	this.Prezime = prezime;
     	this.Adresa = adresa;
-    	this.TipClanarine = metode.tc.get(tipclanarine);
+    	this.TipClanarine = tipclanarine;
     	this.Pol = pol;
     	this.Aktivan = true;
     	this.DatumPoslednjeUplate = LocalDate.now();

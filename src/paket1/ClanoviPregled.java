@@ -57,7 +57,7 @@ public class ClanoviPregled extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int red = ttt.getSelectedRow();
 				if(red == -1) {
-					JOptionPane.showMessageDialog(null, "Morate odabrati red u tabeli.", "Greska", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
 				}else {
 					String ID = tableModel.getValueAt(red, 4).toString();
 					Clan pera = metode.cc.get(red);

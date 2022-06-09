@@ -9,10 +9,10 @@ pera|petrovic|Fruskogorska54|true|2|true|2022-05-24|6|8|false
 pera|petrovic|Fruskogorska54|true|2|true|2022-05-24|6|9|false
 pera|petrovic|Fruskogorska54|true|2|true|2022-05-24|6|10|false
 pera|petrovic|Fruskogorska54|true|2|true|2022-05-24|6|11|false
-pera|petrovic|Fruskogorska54|true|2|true|2022-05-24|6|12|false
+pera|petrovic|Fruskogorska54|false|2|true|2022-05-24|6|12|false
 pera|petrovic|Fruskogorska54|true|2|true|2022-05-24|6|13|false
 pera|petrovic|Fruskogorska54|true|2|true|2022-05-24|6|14|false
-pera|petrovic|Fruskogorska54|true|2|true|2022-05-24|6|15|false
+pera|petrovic|Fruskogorska54|true|2|false|2022-05-24|6|15|false
 pera|petrovic|Fruskogorska54|true|2|true|2022-05-24|6|16|false
 pera|petrovic|Fruskogorska54|true|2|true|2022-05-24|6|17|false
 pera|petrovic|Fruskogorska54|true|2|true|2022-05-24|6|18|false

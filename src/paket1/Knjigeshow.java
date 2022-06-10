@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 
 
 
-public class BPREGLED extends JFrame {
+public class Knjigeshow extends JFrame {
 
 	/**
 	 * 
@@ -38,9 +38,9 @@ public class BPREGLED extends JFrame {
 	private final JButton btnNewButton = new JButton("Delete");
 	private final JButton btnNewButton_1 = new JButton("Edit");
 	
-	public BPREGLED() {
+	public Knjigeshow() {
 		
-		setTitle("Librarians");
+		setTitle("Books");
 		setSize(500, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -55,15 +55,16 @@ public class BPREGLED extends JFrame {
 		mainToolbar.add(btnEdit);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				int red = kompozicijeTabela.getSelectedRow();
 				if(red == -1) {
 					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
 				}else {
 					String ID = tableModel.getValueAt(red, 7).toString();
 					int iz = Integer.parseInt(ID);
-					for(int i=0 ;i<metode.bb.size();i++)
+					for(int i=0 ;i<metode.kk.size();i++)
 					{
-						Bibliotekar temp = metode.bb.get(i);
+						Knjiga temp = metode.kk.get(i);
 						if(temp.oznaka==iz)
 						{
 							temp.obrisan = true;
@@ -74,6 +75,7 @@ public class BPREGLED extends JFrame {
 					
 					
 				}
+				
 			}
 		});
 		
@@ -88,46 +90,41 @@ public class BPREGLED extends JFrame {
 				}else {
 					String ID = tableModel.getValueAt(red, 7).toString();
 					int iz = Integer.parseInt(ID);
-					for(int i=0 ;i<metode.bb.size();i++)
+					for(int i=0 ;i<metode.kk.size();i++)
 					{
-						Bibliotekar temp = metode.bb.get(i);
+						Knjiga temp = metode.kk.get(i);
 						if(temp.oznaka==iz)
 						{
-							ZaposleniFF ssd = new ZaposleniFF(temp);
+							kf df = new kf(temp);
 						}
 					}
 	
 					
 					
 				}
+				
 			}
 		});
 		
 		mainToolbar.add(btnNewButton_1);
 	
 	
-		String[] zaglavlja = new String[] {"Name", "Surname", "Adress","Gender","UserName","Password","Salary","ID","DELETED"};
+		String[] zaglavlja = new String[] {"Name", "Original Name", "writer","Year of publication","Language","Description","Genre","ID","deleted"};
 		Object[][] sadrzaj = new Object[metode.cc.size()][zaglavlja.length];
 		
-		for(int i=0; i<metode.bb.size(); i++) {
-			Bibliotekar Clan1 = metode.bb.get(i);
-			sadrzaj[i][0] = Clan1.Ime;
-			sadrzaj[i][1] = Clan1.Prezime;
-			sadrzaj[i][2] = Clan1.Adresa;
-			if(Clan1.Pol == true)
-			{
-				sadrzaj[i][3] = "Male";
-			}
-			else
-			{
-				sadrzaj[i][3] = "Female";
-			}
-			sadrzaj[i][4] = String.valueOf(Clan1.K_Ime);
-			sadrzaj[i][5] = String.valueOf(Clan1.Sifra);
-			sadrzaj[i][6] = String.valueOf(Clan1.plata);
+		for(int i=0; i<metode.kk.size(); i++) {
+			Knjiga Clan1 = metode.kk.get(i);
+			sadrzaj[i][0] = Clan1.Naslov;
+			sadrzaj[i][1] = Clan1.OriginalniNaslov;
+			sadrzaj[i][2] = Clan1.ImePrezimePisca;
+			
+			sadrzaj[i][3] = String.valueOf(Clan1.GodinaObjavljivanja);
+			
+			sadrzaj[i][4] = String.valueOf(Clan1.JezikOriginala);
+			sadrzaj[i][5] = String.valueOf(Clan1.OpisKnjige);
+			sadrzaj[i][6] = String.valueOf(Clan1.Zanr.Zanr);
 			sadrzaj[i][7] = String.valueOf(Clan1.oznaka);
 			sadrzaj[i][8] = String.valueOf(Clan1.obrisan);
-			
 		}
 		
 		tableModel = new DefaultTableModel(sadrzaj, zaglavlja);

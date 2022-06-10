@@ -16,10 +16,11 @@ public class Administrator extends Zaposleni {
     	this.plata= plata;
     	this.K_Ime= Kime;
     	this.Sifra = Sifra;
+    	this.obrisan = false;
     }
 
 	public Administrator(String ime, String prezime, String adresa, boolean pol, double plata, String kime,
-			String sifra, int id) {
+			String sifra, int id,boolean obrisan) {
 		// TODO Auto-generated constructor stub
 		this.Ime = ime;
     	this.Prezime=prezime;
@@ -32,5 +33,6 @@ public class Administrator extends Zaposleni {
 		
 	}
 	protected int oznaka;
+	protected boolean obrisan;
 
 }

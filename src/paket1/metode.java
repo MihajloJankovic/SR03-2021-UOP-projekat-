@@ -101,7 +101,7 @@ public class metode {
 			}
 			if(brojreda==4)
 			{
-			 idprim=Integer.parseInt(strLine)+1;
+			 idprim=Integer.parseInt(strLine);
 			}
 		
 		  brojreda=brojreda+1;
@@ -203,7 +203,7 @@ public class metode {
 					}
 					if(brojreda==4)
 					{
-					 idprim=Integer.parseInt(strLine)+1;
+					 idprim=Integer.parseInt(strLine);
 					}
 				
 				  brojreda=brojreda+1;
@@ -256,7 +256,7 @@ public class metode {
 					}
 					if(brojreda==4)
 					{
-					 idprim=Integer.parseInt(strLine)+1;
+					 idprim=Integer.parseInt(strLine);
 					}
 				
 				  brojreda=brojreda+1;
@@ -308,13 +308,14 @@ public class metode {
 		  String Sifra=   red[6];
 		  int vrsta = Integer.parseInt(red[7]);
 		  int Id = Integer.parseInt(red[8]);
+		  boolean obrisan = Boolean.parseBoolean(red[9]); 
 		  if(vrsta==0)
 		  {
-			  aa.add(new Administrator(ime,prezime,adresa,pol,plata,Kime,Sifra,Id));
+			  aa.add(new Administrator(ime,prezime,adresa,pol,plata,Kime,Sifra,Id,obrisan));
 		  }
 		  if(vrsta==1)
 		  {
-			  bb.add(new Bibliotekar(ime,prezime,adresa,pol,plata,Kime,Sifra,Id));
+			  bb.add(new Bibliotekar(ime,prezime,adresa,pol,plata,Kime,Sifra,Id,obrisan));
 		  }
 		 
 		  
@@ -324,7 +325,7 @@ public class metode {
 	}
 
 	
-	static void NovaKnjiga(String naslov,String orignaslov,String pisac,int godina,int jezik,String opisk,int zanrr) throws IOException
+	static void NovaKnjiga(String naslov,String orignaslov,String pisac,int godina,Jezik jezik,String opisk,Zanr zanrr) throws IOException
 	{
 		
 		
@@ -363,7 +364,7 @@ public class metode {
 			
 			if(brojreda==4)
 			{
-			 idprim=Integer.parseInt(strLine)+1;
+			 idprim=Integer.parseInt(strLine);
 			}
 		
 		  brojreda=brojreda+1;
@@ -433,8 +434,9 @@ public class metode {
 		  String opis =  red[5];
 		  int zanr =  Integer.parseInt(red[6]);
 		  int id = Integer.parseInt(red[7]);
+		  boolean ob = Boolean.parseBoolean(red[8]);
 		  
-		  kk.add(new Knjiga(naslov,onaslov,imepisca,godina,jezik,opis,zanr,id));
+		  kk.add(new Knjiga(naslov,onaslov,imepisca,godina,jezik,opis,zanr,id,ob));
 		  
 	}
 	  
@@ -464,7 +466,7 @@ public class metode {
 			}
 			if(brojreda==3)
 			{
-			 idknjige=Integer.parseInt(strLine)+1;
+			 idknjige=Integer.parseInt(strLine);
 			}
 			if(brojreda==4)
 			{
@@ -677,7 +679,7 @@ public class metode {
 			Administrator Z1 = aa.get(i);
 			 BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Zaposleni.txt", true));
 			    
-			    myWriter.append(Z1.Ime+"|"+Z1.Prezime+"|"+Z1.Adresa+"|"+String.valueOf(Z1.Pol)+"|"+String.valueOf(Z1.plata)+"|"+Z1.K_Ime+"|"+Z1.Sifra+"|"+"0"+"|"+Z1.oznaka+"\n");
+			    myWriter.append(Z1.Ime+"|"+Z1.Prezime+"|"+Z1.Adresa+"|"+String.valueOf(Z1.Pol)+"|"+String.valueOf(Z1.plata)+"|"+Z1.K_Ime+"|"+Z1.Sifra+"|"+"0"+"|"+Z1.oznaka+"|"+Z1.obrisan+"\n");
 			    myWriter.close();
 			    System.out.println("Successfully wrote to the file.");
 			    
@@ -688,7 +690,7 @@ public class metode {
 			Bibliotekar Z1 = bb.get(i);
 			 BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Zaposleni.txt", true));
 			    
-			    myWriter.append(Z1.Ime+"|"+Z1.Prezime+"|"+Z1.Adresa+"|"+String.valueOf(Z1.Pol)+"|"+String.valueOf(Z1.plata)+"|"+Z1.K_Ime+"|"+Z1.Sifra+"|"+"1"+"|"+Z1.oznaka+"\n");
+			    myWriter.append(Z1.Ime+"|"+Z1.Prezime+"|"+Z1.Adresa+"|"+String.valueOf(Z1.Pol)+"|"+String.valueOf(Z1.plata)+"|"+Z1.K_Ime+"|"+Z1.Sifra+"|"+"1"+"|"+Z1.oznaka+"|"+Z1.obrisan+"\n");
 			    myWriter.close();
 			    System.out.println("Successfully wrote to the file.");
 			    
@@ -740,7 +742,7 @@ public class metode {
 			
 			BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Knjige.txt", true));
 		    
-			myWriter.append(i1.Naslov+"|"+i1.OriginalniNaslov+"|"+i1.ImePrezimePisca+"|"+String.valueOf(i1.GodinaObjavljivanja)+"|"+String.valueOf(i1.JezikOriginala)+"|"+i1.OpisKnjige+"|"+String.valueOf(idzan)+"|"+String.valueOf(i1.id)+"|"+"\n");
+			myWriter.append(i1.Naslov+"|"+i1.OriginalniNaslov+"|"+i1.ImePrezimePisca+"|"+String.valueOf(i1.GodinaObjavljivanja)+"|"+String.valueOf(i1.JezikOriginala)+"|"+i1.OpisKnjige+"|"+String.valueOf(idzan)+"|"+String.valueOf(i1.oznaka)+"|"+String.valueOf(i1.obrisan)+"\n");
 			 myWriter.close();
 			 System.out.println("Successfully wrote to the file.iznaj");
 			

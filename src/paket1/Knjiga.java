@@ -10,7 +10,18 @@ public class Knjiga {
     /**
      * Default constructor
      */
-    public Knjiga(String naslov,String orignaslov,String pisac,int godina,int jezik,String opisk,int zanrr,int id) {
+    public Knjiga(String naslov,String orignaslov,String pisac,int godina,Jezik jezik,String opisk,Zanr zanrr,int id) {
+    	this.Naslov = naslov;
+    	this.OriginalniNaslov = orignaslov;
+    	this.ImePrezimePisca = pisac;
+    	this.GodinaObjavljivanja = godina;
+    	this.OpisKnjige = opisk;
+    	this.JezikOriginala = jezik;
+    	this.Zanr = zanrr;
+    	this.oznaka =id;
+    	
+    }
+    public Knjiga(String naslov,String orignaslov,String pisac,int godina,int jezik,String opisk,int zanrr,int id,boolean ob) {
     	this.Naslov = naslov;
     	this.OriginalniNaslov = orignaslov;
     	this.ImePrezimePisca = pisac;
@@ -25,8 +36,8 @@ public class Knjiga {
 		case 5:this.JezikOriginala = Jezik.SRPSKI;break;
 		}
     	this.Zanr = metode.zanr.get(zanrr);
-    	
-    	
+    	this.oznaka =id;
+    	this.obrisan = ob;
     }
 
     /**
@@ -68,6 +79,7 @@ public class Knjiga {
     /**
      * 
      */
-    protected int id;
+    protected int oznaka;
+    protected boolean obrisan;
 
 }

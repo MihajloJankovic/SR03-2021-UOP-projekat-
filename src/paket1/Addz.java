@@ -19,7 +19,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class AddClan extends JFrame {
+public class Addz extends JFrame {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -33,7 +33,7 @@ public class AddClan extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddClan window = new AddClan();
+					Addz window = new Addz(broj);
 					window.frame.setVisible(true);
 				
 				} catch (Exception e) {
@@ -46,23 +46,36 @@ public class AddClan extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public AddClan() {
-
+	public Addz(int broj) {
+		Addz.broj = broj;
 		initialize();
 	}
+	static int broj;
 	
-	static Clan jo;
 	private JTextField textField_4;
+	private JTextField textField_3;
+	private JTextField textField_5;
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	
+	public static boolean proveriime(String ime)
+	{
+		for(int i=0;i < metode.bb.size();i++)
+		{
+			Bibliotekar test = metode.bb.get(i);
+			if(test.K_Ime==ime)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 	public static boolean isNumeric(String strNum) {
 	    if (strNum == null) {
 	        return false;
 	    }
 	    try {
-	        Integer d = Integer.valueOf(strNum);
+	        Double d = Double.valueOf(strNum);
 	    } catch (NumberFormatException nfe) {
 	        return false;
 	    }
@@ -108,15 +121,10 @@ public class AddClan extends JFrame {
 		lblNewLabel_3.setBounds(86, 192, 156, 31);
 		frame.getContentPane().add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Membership Type :");
-		lblNewLabel_4.setBounds(86, 247, 156, 31);
-		frame.getContentPane().add(lblNewLabel_4);
-		
 		String[] ar = {"Male", "Female"};
 		JComboBox comboBox = new JComboBox(ar);
 		comboBox.setBounds(251, 192, 211, 31);
 		frame.getContentPane().add(comboBox);
-		
 		
 		
 		ArrayList<String> arr = new ArrayList<String>();
@@ -130,20 +138,18 @@ public class AddClan extends JFrame {
 			arrr[i]=arr.get(i);
 		}
 		
-		JComboBox comboBox_1 = new JComboBox(arrr);
-		comboBox_1.setBounds(251, 247, 211, 31);
-		frame.getContentPane().add(comboBox_1);
-		
 		String[] ag = {"true", "false"};
 		
-		JLabel lblNewLabel_7 = new JLabel("Number of paid months :");
-		lblNewLabel_7.setBounds(86, 309, 135, 31);
+		JLabel lblNewLabel_7 = new JLabel("Salary");
+		lblNewLabel_7.setBounds(86, 249, 156, 31);
 		frame.getContentPane().add(lblNewLabel_7);
 		
 		textField_4 = new JTextField();
-		textField_4.setBounds(251, 309, 211, 31);
+		textField_4.setText("0");
+		textField_4.setBounds(251, 249, 211, 31);
 		frame.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
+		
 		
 		JButton btnNewButton = new JButton("Save");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -151,19 +157,12 @@ public class AddClan extends JFrame {
 				String ime1 = (textField.getText());
 				String Prezime = (textField_1.getText());
 				String Adresa = (textField_2.getText());
-				
-				String pol = (String.valueOf(comboBox.getSelectedItem()));
-				String tipc = String.valueOf(comboBox_1.getSelectedItem());
+				String Kkime =(textField_3.getText());
+				String sifra = (textField_5.getText());
+				String pol =(String.valueOf(comboBox.getSelectedItem()));
+
 				String bm = String.valueOf(textField_4.getText());
-				boolean pol1;
-				if(pol == "Male")
-				{
-					pol1 = true;
-				}
-				else
-				{
-					 pol1 = false;
-				}		
+				boolean pol1 ;
 				if(ime1.length()>3)
 				{
 					if(Prezime.length()>3)
@@ -171,36 +170,80 @@ public class AddClan extends JFrame {
 						if(Adresa.length()>3)
 						{
 							if(isNumeric(bm)==true)
-							{
-								
-								
-								int  d = Integer.valueOf(bm);
-								TipClanarine pera = null;
-								for(int i=0;i<metode.tc.size();i++)
-								{	
-									TipClanarine temp = metode.tc.get(i);
-									if(tipc == temp.ime)
+							{	
+								Double  d = Double.valueOf(bm);
+								if(d > 100)
+								{
+									if(Kkime.length() >3)
 									{
-										pera = temp;
+										if(proveriime(Kkime)==true)
+										{
+											if(sifra.length() > 3)
+											{
+												
+												if(pol == "Male")
+												{
+													pol1 = true;
+												}
+												else
+												{
+													 pol1 = false;
+												}
+												if(broj ==1)
+												{
+													try {
+														metode.NoviZaposleni(ime1, Prezime, Adresa, pol1, d, Kkime, sifra,0);
+													} catch (IOException e1) {
+														// TODO Auto-generated catch block
+														e1.printStackTrace();
+													}
+												}
+												else
+												{
+													try {
+														metode.NoviZaposleni(ime1, Prezime, Adresa, pol1, d, Kkime, sifra,1);
+													} catch (IOException e1) {
+														// TODO Auto-generated catch block
+														e1.printStackTrace();
+													}
+												}
+												
+												
+											
+												
+												try {
+													metode.upisiSVE();
+												} catch (IOException e1) {
+													// TODO Auto-generated catch block
+													e1.printStackTrace();
+												}
+											}
+											else
+											{
+												JOptionPane.showMessageDialog(null, "Password too short");
+											}
+										}
+								     	
+										else
+										{
+											JOptionPane.showMessageDialog(null, "That UserName Allready Exists.");
+										}
+							
+									}
+									else
+									{
+										JOptionPane.showMessageDialog(null, "Username too short");
 									}
 								}
-								try {
-									metode.NoviClan(ime1, Prezime, Adresa, pol1,pera, d);
-								} catch (IOException e2) {
-									// TODO Auto-generated catch block
-									e2.printStackTrace();
+								else
+								{
+									JOptionPane.showMessageDialog(null, "Salary too small....");
 								}
 								
-								try {
-									metode.upisiSVE();
-								} catch (IOException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
 							}
 							else
 							{
-								JOptionPane.showMessageDialog(null, "Number of paid monts is no Ineger");
+								JOptionPane.showMessageDialog(null, "Salary is no Number");
 							}
 							
 						}
@@ -223,7 +266,26 @@ public class AddClan extends JFrame {
 			
 			}
 		});
-		btnNewButton.setBounds(225, 402, 123, 45);
+		btnNewButton.setBounds(237, 521, 123, 45);
 		frame.getContentPane().add(btnNewButton);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(251, 302, 211, 31);
+		frame.getContentPane().add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_5 = new JTextField();
+		textField_5.setBounds(251, 349, 211, 31);
+		frame.getContentPane().add(textField_5);
+		textField_5.setColumns(10);
+		
+		JLabel lblNewLabel_4 = new JLabel("UserName :");
+		lblNewLabel_4.setBounds(86, 302, 107, 31);
+		frame.getContentPane().add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("Password :");
+		lblNewLabel_5.setBounds(86, 349, 107, 31);
+		frame.getContentPane().add(lblNewLabel_5);
+	
 	}
 }

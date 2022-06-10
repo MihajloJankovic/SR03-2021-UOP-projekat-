@@ -53,6 +53,30 @@ public class APREGLED extends JFrame {
 		
 		
 		mainToolbar.add(btnEdit);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int red = kompozicijeTabela.getSelectedRow();
+				if(red == -1) {
+					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
+				}else {
+					String ID = tableModel.getValueAt(red, 7).toString();
+					int iz = Integer.parseInt(ID);
+					for(int i=0 ;i<metode.aa.size();i++)
+					{
+						Administrator temp = metode.aa.get(i);
+						if(temp.oznaka==iz)
+						{
+							temp.obrisan = true;
+							JOptionPane.showMessageDialog(null, "User Deleted.");
+						}
+					}
+	
+					
+					
+				}
+				
+			}
+		});
 		
 		mainToolbar.add(btnNewButton);
 		mainToolbar.add(btnDelete);
@@ -83,7 +107,7 @@ public class APREGLED extends JFrame {
 		mainToolbar.add(btnNewButton_1);
 	
 	
-		String[] zaglavlja = new String[] {"Name", "Surname", "Adress","Gender","UserName","Password","Salary","ID"};
+		String[] zaglavlja = new String[] {"Name", "Surname", "Adress","Gender","UserName","Password","Salary","ID","DELETED"};
 		Object[][] sadrzaj = new Object[metode.cc.size()][zaglavlja.length];
 		
 		for(int i=0; i<metode.aa.size(); i++) {
@@ -103,7 +127,7 @@ public class APREGLED extends JFrame {
 			sadrzaj[i][5] = String.valueOf(Clan1.Sifra);
 			sadrzaj[i][6] = String.valueOf(Clan1.plata);
 			sadrzaj[i][7] = String.valueOf(Clan1.oznaka);
-			
+			sadrzaj[i][8] = String.valueOf(Clan1.obrisan);
 			
 		}
 		

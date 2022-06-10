@@ -1,6 +1,7 @@
 package paket1;
 
 import java.awt.EventQueue;
+import java.awt.TextArea;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,8 +19,9 @@ import javax.swing.JDialog;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
 
-public class AddClan extends JFrame {
+public class Knjgan extends JFrame {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -33,7 +35,7 @@ public class AddClan extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AddClan window = new AddClan();
+					Knjgan window = new Knjgan();
 					window.frame.setVisible(true);
 				
 				} catch (Exception e) {
@@ -46,12 +48,12 @@ public class AddClan extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public AddClan() {
+	public Knjgan() {
 
 		initialize();
 	}
 	
-	static Clan jo;
+	
 	private JTextField textField_4;
 	/**
 	 * Initialize the contents of the frame.
@@ -71,6 +73,7 @@ public class AddClan extends JFrame {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setVisible(true);
+		frame.setTitle("Add book");
 		frame.getContentPane().addComponentListener(new ComponentAdapter() {
 
 		});
@@ -92,30 +95,31 @@ public class AddClan extends JFrame {
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(251, 140, 211, 31);
+		textField_2.setBounds(251, 135, 211, 31);
 		frame.getContentPane().add(textField_2);
 		textField_2.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Surname :");
+		JLabel lblNewLabel_1 = new JLabel("Original Name  :");
 		lblNewLabel_1.setBounds(86, 77, 135, 31);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Adress :");
+		JLabel lblNewLabel_2 = new JLabel("Writer :");
 		lblNewLabel_2.setBounds(86, 135, 135, 31);
 		frame.getContentPane().add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Sex :");
+		JLabel lblNewLabel_3 = new JLabel("Year of publication :");
 		lblNewLabel_3.setBounds(86, 192, 156, 31);
 		frame.getContentPane().add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_4 = new JLabel("Membership Type :");
+		JLabel lblNewLabel_4 = new JLabel("Language  :");
 		lblNewLabel_4.setBounds(86, 247, 156, 31);
 		frame.getContentPane().add(lblNewLabel_4);
 		
+		JLabel lblNewLabel_5 = new JLabel("Genre :");
+		lblNewLabel_5.setBounds(86, 298, 156, 31);
+		frame.getContentPane().add(lblNewLabel_5);
+		
 		String[] ar = {"Male", "Female"};
-		JComboBox comboBox = new JComboBox(ar);
-		comboBox.setBounds(251, 192, 211, 31);
-		frame.getContentPane().add(comboBox);
 		
 		
 		
@@ -130,88 +134,141 @@ public class AddClan extends JFrame {
 			arrr[i]=arr.get(i);
 		}
 		
-		JComboBox comboBox_1 = new JComboBox(arrr);
-		comboBox_1.setBounds(251, 247, 211, 31);
-		frame.getContentPane().add(comboBox_1);
-		
 		String[] ag = {"true", "false"};
 		
-		JLabel lblNewLabel_7 = new JLabel("Number of paid months :");
-		lblNewLabel_7.setBounds(86, 309, 135, 31);
-		frame.getContentPane().add(lblNewLabel_7);
+	
 		
 		textField_4 = new JTextField();
-		textField_4.setBounds(251, 309, 211, 31);
+		textField_4.setText("0");
+		textField_4.setBounds(251, 192, 211, 31);
 		frame.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
+
+		
+		
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(251, 359, 211, 119);
+		frame.getContentPane().add(textArea);
+		JLabel lblNewLabel_6 = new JLabel("Description :");
+		lblNewLabel_6.setBounds(86, 353, 111, 36);
+		frame.getContentPane().add(lblNewLabel_6);
+		
+		String[] agg = {"Serbian", "English","France","German","Russian"};
+		
+
+		ArrayList<String> arr1 = new ArrayList<String>();
+		for(int i = 0;i < metode.zanr.size();i++)
+		{
+			arr1.add(metode.zanr.get(i).Zanr);
+		}
+		String arrr1[] = new String[arr1.size()];
+		for(int i=0 ;i< arr1.size();i++)
+		{
+			arrr1[i]=arr1.get(i);
+		}
+		JComboBox comboBox_3_1 = new JComboBox(arrr1);
+		comboBox_3_1.setBounds(251, 298, 211, 31);
+		frame.getContentPane().add(comboBox_3_1);
+	
+		
+		JComboBox comboBox_3 = new JComboBox(agg);
+		comboBox_3.setBounds(251, 247, 211, 31);
+		frame.getContentPane().add(comboBox_3);
+		String odabir = "";
+	
+		
 		
 		JButton btnNewButton = new JButton("Save");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String ime1 = (textField.getText());
-				String Prezime = (textField_1.getText());
-				String Adresa = (textField_2.getText());
+				String ime2 = (textField_1.getText());
+				String imepisca = (textField_2.getText());
+				String opis = String.valueOf(textArea.getText());
+				Jezik temp = null;
+				String temp3 = String.valueOf(comboBox_3_1.getSelectedItem());
+				Zanr fin = null ;
 				
-				String pol = (String.valueOf(comboBox.getSelectedItem()));
-				String tipc = String.valueOf(comboBox_1.getSelectedItem());
-				String bm = String.valueOf(textField_4.getText());
-				boolean pol1;
-				if(pol == "Male")
+				String Jez =(String.valueOf(comboBox_3.getSelectedItem()));
+				switch(Jez)
 				{
-					pol1 = true;
+				case "Serbian": temp = Jezik.SRPSKI;break;
+				case "English":temp = Jezik.ENGLESKI;break;
+				case "German":temp = Jezik.NEMACKI;break;
+				case "France":temp = Jezik.FRANCUSKI;break;
+				case "Russian":temp = Jezik.RUSKI;break;
 				}
-				else
+				String bm = String.valueOf(textField_4.getText());
+				for(int i=0;i < metode.zanr.size();i++)
 				{
-					 pol1 = false;
-				}		
+					Zanr temp1 = metode.zanr.get(i);
+					if(temp1.Zanr ==temp3)
+					{
+						fin = temp1;
+					}
+				}
 				if(ime1.length()>3)
 				{
-					if(Prezime.length()>3)
+					if(ime2.length()>3)
 					{
-						if(Adresa.length()>3)
+						if(imepisca.length()>3)
 						{
 							if(isNumeric(bm)==true)
 							{
-								
-								
 								int  d = Integer.valueOf(bm);
-								TipClanarine pera = null;
-								for(int i=0;i<metode.tc.size();i++)
-								{	
-									TipClanarine temp = metode.tc.get(i);
-									if(tipc == temp.ime)
+								if(d <=2023 )
+								{
+									if(opis.length() > 5)
 									{
-										pera = temp;
+										
+									
+									
+										try {
+											metode.NovaKnjiga(ime1, ime2, imepisca, d, temp, opis, fin);
+										} catch (IOException e2) {
+											// TODO Auto-generated catch block
+											e2.printStackTrace();
+										}
+										try {
+											metode.upisiSVE();
+										} catch (IOException e1) {
+											// TODO Auto-generated catch block
+											e1.printStackTrace();
+										}
 									}
+									else
+									{
+										JOptionPane.showMessageDialog(null, "Discription too short");
+									}
+									
+									
+									
+									
+									
+									
+									
+									
 								}
-								try {
-									metode.NoviClan(ime1, Prezime, Adresa, pol1,pera, d);
-								} catch (IOException e2) {
-									// TODO Auto-generated catch block
-									e2.printStackTrace();
+								else {
+									JOptionPane.showMessageDialog(null, "Year is in the future");
 								}
 								
-								try {
-									metode.upisiSVE();
-								} catch (IOException e1) {
-									// TODO Auto-generated catch block
-									e1.printStackTrace();
-								}
 							}
 							else
 							{
-								JOptionPane.showMessageDialog(null, "Number of paid monts is no Ineger");
+								JOptionPane.showMessageDialog(null, "Year is not number");
 							}
 							
 						}
 						else
 						{
-							JOptionPane.showMessageDialog(null, "Adress too short");
+							JOptionPane.showMessageDialog(null, "Writer Name too short");
 						}
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(null, "Surname too short");
+						JOptionPane.showMessageDialog(null, "Origin Name  too short");
 					}
 					
 				}
@@ -223,7 +280,9 @@ public class AddClan extends JFrame {
 			
 			}
 		});
-		btnNewButton.setBounds(225, 402, 123, 45);
+		btnNewButton.setBounds(237, 521, 123, 45);
 		frame.getContentPane().add(btnNewButton);
+		
+		
 	}
 }

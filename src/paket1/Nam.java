@@ -133,7 +133,31 @@ public class Nam extends javax.swing.JFrame {
 		menuBar.add(mnNewMenu_4);
 		
 		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Add");
+		mntmNewMenuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				zanradd cppp = new zanradd();
+				
+			}
+		});
 		mnNewMenu_4.add(mntmNewMenuItem_8);
+		
+		JMenuItem mntmNewMenuItem_14 = new JMenuItem("show List");
+		mntmNewMenuItem_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				Zanrp cppp1 = new Zanrp();
+				cppp1.setVisible(true);
+				
+			}
+			
+			
+			
+			
+			
+		});
+		mnNewMenu_4.add(mntmNewMenuItem_14);
 		
 		JMenu mnNewMenu_5 = new JMenu("Membership type");
 		menuBar.add(mnNewMenu_5);

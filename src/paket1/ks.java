@@ -24,7 +24,7 @@ import java.awt.event.ActionEvent;
 
 
 
-public class Knjigeshow extends JFrame {
+public class ks extends JFrame {
 
 	/**
 	 * 
@@ -36,12 +36,10 @@ public class Knjigeshow extends JFrame {
 	
 	private DefaultTableModel tableModel;
 	private JTable kompozicijeTabela;
-	private final JButton btnNewButton = new JButton("Delete");
-	private final JButton btnNewButton_1 = new JButton("Edit");
-	private final JButton btnNewButton_2 = new JButton("Copies");
+	private final JButton btnNewButton_1 = new JButton("Select");
 	
-	public Knjigeshow() {
-		
+	public ks(Knjiga pros) {
+		this.g = pros;
 		setTitle("Books");
 		setSize(500, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -49,45 +47,12 @@ public class Knjigeshow extends JFrame {
 		initGUI();
 		initActions();
 	}
-
+  protected Knjiga g;
 	private void initGUI() {
 		
 		
 		
 		mainToolbar.add(btnEdit);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				int red = kompozicijeTabela.getSelectedRow();
-				if(red == -1) {
-					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
-				}else {
-					String ID = (String) tableModel.getValueAt(red, 7);
-					int iz = Integer.parseInt(ID);
-					for(int i=0 ;i<metode.kk.size();i++)
-					{
-						Knjiga temp = metode.kk.get(i);
-						if(temp.oznaka==iz)
-						{
-							temp.obrisan = true;
-							try {
-								metode.upisiSVE();
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							JOptionPane.showMessageDialog(null, "Book Deleted.");
-						}
-					}
-	
-					
-					
-				}
-				
-			}
-		});
-		
-		mainToolbar.add(btnNewButton);
 		mainToolbar.add(btnDelete);
 		getContentPane().add(mainToolbar, BorderLayout.NORTH);
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -103,7 +68,7 @@ public class Knjigeshow extends JFrame {
 						Knjiga temp = metode.kk.get(i);
 						if(temp.oznaka==iz)
 						{
-							kf df = new kf(temp);
+							g = temp;
 						}
 					}
 	
@@ -115,31 +80,6 @@ public class Knjigeshow extends JFrame {
 		});
 		
 		mainToolbar.add(btnNewButton_1);
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int red = kompozicijeTabela.getSelectedRow();
-				if(red == -1) {
-					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
-				}else {
-					String ID = tableModel.getValueAt(red, 7).toString();
-					int iz = Integer.parseInt(ID);
-					for(int i=0 ;i<metode.kk.size();i++)
-					{
-						Knjiga temp = metode.kk.get(i);
-						if(temp.oznaka==iz)
-						{
-							primercip df = new primercip(temp);
-							df.setVisible(true);
-						}
-					}
-	
-					
-					
-				}
-			}
-		});
-		
-		mainToolbar.add(btnNewButton_2);
 	
 	
 		String[] zaglavlja = new String[] {"Name", "Original Name", "writer","Year of publication","Language","Description","Genre","ID","deleted"};

@@ -545,11 +545,11 @@ public class metode {
 		  // there is character in a string
 		  while ((st = br.readLine()) != null) {
 
-		  
-			  String [] red = st.split("\\|");
-			  for(String redd: red) {
-		            
-		        }
+			  String [] red1 = st.split("\\#");
+			  String red2 = red1[0];
+			  String pr = red1[1];
+			  String [] red = red2.split("\\|");
+			  
 			  int tip1 = Integer.parseInt(red[0]);
 			  if(tip1==1)
 			  {	
@@ -567,9 +567,21 @@ public class metode {
 				  LocalDate Datumm = LocalDate.parse(datum, formatter);
 				  String datum2 = red[4];
 				  LocalDate dvracanja = LocalDate.parse(datum2, formatter);
-				  int p1 = Integer.parseInt(red[5]);
-				  ii.add(new Iznajmljivanje(tip1,zapo,clan11,Datumm,dvracanja,p1));
-				  
+				  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,Datumm,dvracanja);
+				  ii.add(t1);
+				  String [] red3 = red2.split("\\|");
+				  for (int i=0;i < red3.length;i++)
+				  {
+					  int broj = Integer.parseInt(red3[i]);
+					  for(int j = 0;j <metode.pp.size();j++)
+					  {
+						  if(metode.pp.get(j).oznaka==broj)
+						  {
+							  t1.ppo.add(metode.pp.get(j));
+						  }
+					  }
+					  
+				  }
 			
 				  
 			  }
@@ -589,8 +601,21 @@ public class metode {
 				  LocalDate Datumm = LocalDate.parse(datum, formatter);
 				  String datum2 = red[4];
 				  LocalDate dvracanja = LocalDate.parse(datum2, formatter);
-				  int p1 = Integer.parseInt(red[5]);
-				  ii.add(new Iznajmljivanje(tip1,zapo,clan11,Datumm,dvracanja,p1));
+				  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,Datumm,dvracanja);
+				  ii.add(t1);
+				  String [] red3 = red2.split("\\|");
+				  for (int i=0;i < red3.length;i++)
+				  {
+					  int broj = Integer.parseInt(red3[i]);
+					  for(int j = 0;j <metode.pp.size();j++)
+					  {
+						  if(metode.pp.get(j).oznaka==broj)
+						  {
+							  t1.ppo.add(metode.pp.get(j));
+						  }
+					  }
+					  
+				  }
 			  }
 	  
 		}
@@ -600,7 +625,7 @@ public class metode {
 		
 	}
 	
-	static void NovoIznajmljivanje(int tip1,int zapo1,int clan1,int III)
+	static void NovoIznajmljivanje(int tip1,int zapo1,int clan1,ArrayList<Primerak> ppo)
 	{	 
 		int zapo2 =0;
 		if(tip1==1)
@@ -617,9 +642,12 @@ public class metode {
 			  Clan clan11 = cc.get(clan1-1);
 		      LocalDate datumm = LocalDate.now();
 			  LocalDate dvracanja = datumm.plusMonths(3);
-			  int p1 = III;
-			  ii.add(new Iznajmljivanje(tip1,zapo,clan11,datumm,dvracanja,p1));
-			  
+			  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,datumm,dvracanja);
+			  ii.add(t1);
+			  for(int i =0;i < ppo.size();i++)
+			  {
+				  t1.ppo.add(ppo.get(i));
+			  }
 
 		  }
 		  if(tip1==0)
@@ -636,8 +664,12 @@ public class metode {
 			  Clan clan11 = cc.get(clan1-1);
 		      LocalDate datumm = LocalDate.now();
 			  LocalDate dvracanja = datumm.plusMonths(3);
-			  int p1 = III;
-			  ii.add(new Iznajmljivanje(tip1,zapo,clan11,datumm,dvracanja,p1));
+			  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,datumm,dvracanja);
+			  ii.add(t1);
+			  for(int i =0;i < ppo.size();i++)
+			  {
+				  t1.ppo.add(ppo.get(i));
+			  }
 		  }
 
 		 
@@ -705,7 +737,11 @@ public class metode {
 			Iznajmljivanje i1 = ii.get(i);
 			BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Iznaj.txt", true));
 		    
-			 myWriter.append(String.valueOf(i1.tip)+"|"+String.valueOf(i1.zaposleni)+"|"+String.valueOf(i1.clan.BrojCK)+"|"+String.valueOf(i1.DatumIznamljivanja)+"|"+String.valueOf(i1.DatumVracanja)+"|"+String.valueOf(i1.Primerak)+"\n");
+			 myWriter.append(String.valueOf(i1.tip)+"|"+String.valueOf(i1.zaposleni)+"|"+String.valueOf(i1.clan.BrojCK)+"|"+String.valueOf(i1.DatumIznamljivanja)+"|"+String.valueOf(i1.DatumVracanja)+"#");
+			 for(int i2=0; i2 < metode.zanr.size();i2++)
+			 {
+				 myWriter.append(String.valueOf(i1.ppo.get(i2).oznaka)+"|");
+			 }
 			 myWriter.close();
 			 System.out.println("Successfully wrote to the file.iznaj");
 			
@@ -729,7 +765,7 @@ public class metode {
 		writer1111.print("");
 		writer1111.close();
 		int idzan=0;
-		for(int i = 0 ;i< zanr.size();i++)
+		for(int i = 0 ;i< kk.size();i++)
 		{
 			Knjiga i1 = kk.get(i);
 			for(int g = 0 ;g< zanr.size();g++)
@@ -737,6 +773,10 @@ public class metode {
 				if(zanr.get(g).Zanr==i1.Zanr.Zanr)
 				{
 					idzan=g;
+				}
+				else
+				{
+					idzan=0;
 				}
 			}
 			

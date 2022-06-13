@@ -26,7 +26,7 @@ public class metode {
 	static int templogin =0;
 	static void pss()
 	{
-		System.out.println(templogin);
+		
 	}
 	static void noviZanr(String ime)
 	{
@@ -65,7 +65,7 @@ public class metode {
 		  while ((st = br.readLine()) != null) {
 
 			  String [] red = st.split("\\|");
-			  tc.add(new TipClanarine(String.valueOf(red[0]),Double.valueOf(red[1])));
+			  tc.add(new TipClanarine(String.valueOf(red[0]),Double.valueOf(red[1]),Boolean.valueOf(red[2])));
 			 
 			  
 		}
@@ -425,11 +425,11 @@ public class metode {
 		  String jezik1 = red[4];
 		  switch(jezik1)
 			{
-			case "ENGLESKI":jezik = 1;break;
-			case "FRANCUSKI":jezik = 2;break;
+			case "SRPSKI":jezik = 1;break;
+			case "ENGLESKI":jezik = 2;break;
 			case "NEMACKI":jezik = 3;break;
-			case "RUSKI":jezik = 4;break;
-			case "SRPSKI":jezik = 5;break;
+			case "FRANCUSKI":jezik = 4;break;
+			case "RUSKI":jezik = 5;break;
 			}
 		  String opis =  red[5];
 		  int zanr =  Integer.parseInt(red[6]);
@@ -499,7 +499,7 @@ public class metode {
 		BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Primerci.txt", true));
 	    
 	
-	    myWriter.append(String.valueOf(knjiga)+"|"+String.valueOf(brojstr)+"|"+String.valueOf(tip)+"|"+String.valueOf(godina)+"|"+String.valueOf(jezik)+"|"+String.valueOf(iznajmljena)+"|"+String.valueOf(idprim)+"\n");
+	    myWriter.append(String.valueOf(knjiga)+"|"+String.valueOf(brojstr)+"|"+String.valueOf(tip)+"|"+String.valueOf(godina)+"|"+String.valueOf(jezik)+"|"+String.valueOf(iznajmljena)+"|"+String.valueOf(idprim)+"|"+"false"+"\n");
 	    myWriter.close();
 	    System.out.println("Successfully wrote to the file. Primerci");
 	    
@@ -529,8 +529,9 @@ public class metode {
 			  int jezik = Integer.parseInt(red[4]);
 			  boolean iznajmljena = Boolean.parseBoolean(red[5]);
 			  int id = Integer.parseInt(red[6]);
+			  boolean ob = Boolean.parseBoolean(red[7]);
 			 
-			 pp.add(new Primerak(knjiga,brojstr,tip,godina,jezik,iznajmljena,id));
+			 pp.add(new Primerak(knjiga,brojstr,tip,godina,jezik,iznajmljena,id,ob));
 			  
 		}
 		  
@@ -796,7 +797,7 @@ public class metode {
 			TipClanarine Z1 = tc.get(i);
 			 BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/TipoviClnarine.txt", true));
 			    
-			    myWriter.append(Z1.ime+"|"+String.valueOf(Z1.cena)+"\n");
+			    myWriter.append(Z1.ime+"|"+String.valueOf(Z1.cena)+"|"+String.valueOf(Z1.obrisan)+"\n");
 			    myWriter.close();
 			    System.out.println("Successfully wrote to the file.");
 			    

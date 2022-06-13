@@ -56,7 +56,8 @@ public class primercip extends JFrame {
 				
 				
 				
-				noviP df = new noviP();
+				noviP df = new noviP(jo);
+				
 			}
 		});
 		
@@ -71,15 +72,15 @@ public class primercip extends JFrame {
 				if(red == -1) {
 					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
 				}else {
-					String ID = tableModel.getValueAt(red, 7).toString();
+					String ID = (String) tableModel.getValueAt(red, 6);
 					int iz = Integer.parseInt(ID);
-					for(int i=0 ;i<metode.aa.size();i++)
+					for(int i=0 ;i<metode.pp.size();i++)
 					{
-						Administrator temp = metode.aa.get(i);
+						Primerak temp = metode.pp.get(i);
 						if(temp.oznaka==iz)
 						{
 							temp.obrisan = true;
-							JOptionPane.showMessageDialog(null, "User Deleted.");
+							JOptionPane.showMessageDialog(null, "Copy Deleted.");
 						}
 					}
 	
@@ -93,20 +94,36 @@ public class primercip extends JFrame {
 		mainToolbar.add(btnNewButton);
 		mainToolbar.add(btnDelete);
 		getContentPane().add(mainToolbar, BorderLayout.NORTH);
+	
+		
+		mainToolbar.add(btnNewButton_1);
+	
+		ArrayList<Primerak> pp = new ArrayList<>();
+		for(int i =0; i < metode.pp.size();i++)
+		{
+			if(metode.pp.get(i).obrisan != true)
+			{
+				if(metode.pp.get(i).Knjiga == jo)
+				{
+					pp.add(metode.pp.get(i));
+				}
+			}
+			
+		}
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int red = kompozicijeTabela.getSelectedRow();
 				if(red == -1) {
 					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
 				}else {
-					String ID = tableModel.getValueAt(red, 7).toString();
+					String ID = (String) tableModel.getValueAt(red, 6);
 					int iz = Integer.parseInt(ID);
-					for(int i=0 ;i<metode.aa.size();i++)
+					for(int i=0 ;i<pp.size();i++)
 					{
-						Administrator temp = metode.aa.get(i);
+						Primerak temp = pp.get(i);
 						if(temp.oznaka==iz)
 						{
-							ZaposleniF df = new ZaposleniF(temp);
+							Primerake dfy = new Primerake(temp);
 						}
 					}
 	
@@ -115,26 +132,23 @@ public class primercip extends JFrame {
 				}
 			}
 		});
-		
-		mainToolbar.add(btnNewButton_1);
-	
-	
 		String[] zaglavlja = new String[] {"Book", "Connection type", "Year printed","Number of pages","Language of printing","rented","ID"};
-		Object[][] sadrzaj = new Object[metode.cc.size()][zaglavlja.length];
+		Object[][] sadrzaj = new Object[pp.size()][zaglavlja.length];
 		
-		for(int i=0; i<metode.pp.size(); i++) {
-			Primerak Clan1 = metode.pp.get(i);
-			if(Clan1.Knjiga == jo)
-			{
-				
-				sadrzaj[i][0] = Clan1.Knjiga;
+		
+		for(int i=0; i<pp.size(); i++) {
+			Primerak Clan1 = pp.get(i);
+			
+			
+		
+				sadrzaj[i][0] = Clan1.Knjiga.Naslov;
 				if(Clan1.TipPoveza == true)
 				{
 					sadrzaj[i][1] = "hard";
 				}
-				if(Clan1.TipPoveza == false)
-				{
-					sadrzaj[i][1] = "soft";
+			if(Clan1.TipPoveza == false)
+		{
+				sadrzaj[i][1] = "soft";
 				}
 			
 				sadrzaj[i][2] = String.valueOf(Clan1.GodinaStampanja);
@@ -144,7 +158,7 @@ public class primercip extends JFrame {
 				sadrzaj[i][5] = String.valueOf(Clan1.Iznajmljena);
 				sadrzaj[i][6] = String.valueOf(Clan1.oznaka);
 				
-			}
+			
 			
 			
 		}

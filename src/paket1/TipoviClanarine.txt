@@ -1,4 +1,0 @@
-Penzioner|150.0
-Dete|100.0
-Osoba|250.0
-Vip clan|500.0

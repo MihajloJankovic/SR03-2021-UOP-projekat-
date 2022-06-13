@@ -1,5 +1,4 @@
-Penzioner|150.0
-Dete|100.0
-Osoba|250.0
-Vip clan|500.0
-Vip clan premium|500.0
+lgb1|100.0|true
+gadga|20.0|false
+igb11|2000.0|false
+perica|1111.0|false

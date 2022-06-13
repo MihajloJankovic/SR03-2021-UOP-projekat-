@@ -29,11 +29,12 @@ public class Knjiga {
     	this.OpisKnjige = opisk;
     	switch(jezik)
 		{
-		case 1:this.JezikOriginala = Jezik.ENGLESKI;break;
-		case 2:this.JezikOriginala = Jezik.FRANCUSKI;break;
-		case 3:this.JezikOriginala = Jezik.NEMACKI;break;
-		case 4:this.JezikOriginala = Jezik.RUSKI;break;
-		case 5:this.JezikOriginala = Jezik.SRPSKI;break;
+		case 1:this.JezikOriginala =Jezik.SRPSKI;break; 
+		case 2:this.JezikOriginala = Jezik.ENGLESKI;break;
+		case 3:this.JezikOriginala =Jezik.NEMACKI;break;
+		case 4:this.JezikOriginala=  Jezik.FRANCUSKI;break;
+		case 5:this.JezikOriginala = Jezik.RUSKI;break;
+		
 		}
     	this.Zanr = metode.zanr.get(zanrr);
     	this.oznaka =id;

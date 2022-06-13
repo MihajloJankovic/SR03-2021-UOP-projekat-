@@ -24,7 +24,7 @@ import java.awt.event.ActionEvent;
 
 
 
-public class Knjigeshow extends JFrame {
+public class pps extends JFrame {
 
 	/**
 	 * 
@@ -38,11 +38,10 @@ public class Knjigeshow extends JFrame {
 	private JTable kompozicijeTabela;
 	private final JButton btnNewButton = new JButton("Delete");
 	private final JButton btnNewButton_1 = new JButton("Edit");
-	private final JButton btnNewButton_2 = new JButton("Copies");
 	
-	public Knjigeshow() {
+	public pps() {
 		
-		setTitle("Books");
+		setTitle("List");
 		setSize(500, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -50,6 +49,7 @@ public class Knjigeshow extends JFrame {
 		initActions();
 	}
 
+	
 	private void initGUI() {
 		
 		
@@ -62,21 +62,15 @@ public class Knjigeshow extends JFrame {
 				if(red == -1) {
 					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
 				}else {
-					String ID = (String) tableModel.getValueAt(red, 7);
-					int iz = Integer.parseInt(ID);
-					for(int i=0 ;i<metode.kk.size();i++)
+					String ID = tableModel.getValueAt(red, 0).toString();
+					
+					for(int i=0 ;i<metode.tc.size();i++)
 					{
-						Knjiga temp = metode.kk.get(i);
-						if(temp.oznaka==iz)
+						TipClanarine temp = metode.tc.get(i);
+						if(temp.ime==ID)
 						{
 							temp.obrisan = true;
-							try {
-								metode.upisiSVE();
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-							JOptionPane.showMessageDialog(null, "Book Deleted.");
+							JOptionPane.showMessageDialog(null, "DELETED");
 						}
 					}
 	
@@ -92,18 +86,20 @@ public class Knjigeshow extends JFrame {
 		getContentPane().add(mainToolbar, BorderLayout.NORTH);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				int red = kompozicijeTabela.getSelectedRow();
 				if(red == -1) {
 					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
 				}else {
-					String ID = tableModel.getValueAt(red, 7).toString();
-					int iz = Integer.parseInt(ID);
-					for(int i=0 ;i<metode.kk.size();i++)
+					String ID = tableModel.getValueAt(red, 0).toString();
+					
+					for(int i=0 ;i<metode.tc.size();i++)
 					{
-						Knjiga temp = metode.kk.get(i);
-						if(temp.oznaka==iz)
+						TipClanarine temp = metode.tc.get(i);
+						if(temp.ime==ID)
 						{
-							kf df = new kf(temp);
+							ppsEDIT df = new ppsEDIT(temp);
+							
 						}
 					}
 	
@@ -115,57 +111,24 @@ public class Knjigeshow extends JFrame {
 		});
 		
 		mainToolbar.add(btnNewButton_1);
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int red = kompozicijeTabela.getSelectedRow();
-				if(red == -1) {
-					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
-				}else {
-					String ID = tableModel.getValueAt(red, 7).toString();
-					int iz = Integer.parseInt(ID);
-					for(int i=0 ;i<metode.kk.size();i++)
-					{
-						Knjiga temp = metode.kk.get(i);
-						if(temp.oznaka==iz)
-						{
-							primercip df = new primercip(temp);
-							df.setVisible(true);
-						}
-					}
-	
-					
-					
-				}
-			}
-		});
-		
-		mainToolbar.add(btnNewButton_2);
-		ArrayList<Knjiga> kk = new ArrayList<>();
-		for(int i = 0;i < metode.kk.size();i++)
+		ArrayList<TipClanarine> tc = new ArrayList<>();
+		for(int i = 0;i < metode.tc.size();i++)
 		{
-			Knjiga temp = metode.kk.get(i);
+			TipClanarine temp = metode.tc.get(i);
 			if (temp.obrisan == false)
 					{
-						kk.add(temp);
+						tc.add(temp);
 					}
 		}
 	
-		String[] zaglavlja = new String[] {"Name", "Original Name", "writer","Year of publication","Language","Description","Genre","ID","deleted"};
-		Object[][] sadrzaj = new Object[kk.size()][zaglavlja.length];
+		String[] zaglavlja = new String[] {"Name", "Cost"};
+		Object[][] sadrzaj = new Object[tc.size()][zaglavlja.length];
 		
-		for(int i=0; i<kk.size(); i++) {
-			Knjiga Clan1 = kk.get(i);
-			sadrzaj[i][0] = Clan1.Naslov;
-			sadrzaj[i][1] = Clan1.OriginalniNaslov;
-			sadrzaj[i][2] = Clan1.ImePrezimePisca;
+		for(int i=0; i<tc.size(); i++) {
+			TipClanarine Clan1 = tc.get(i);
+			sadrzaj[i][0] = Clan1.ime;
+			sadrzaj[i][1] = String.valueOf(Clan1.cena);
 			
-			sadrzaj[i][3] = String.valueOf(Clan1.GodinaObjavljivanja);
-			
-			sadrzaj[i][4] = String.valueOf(Clan1.JezikOriginala);
-			sadrzaj[i][5] = String.valueOf(Clan1.OpisKnjige);
-			sadrzaj[i][6] = String.valueOf(Clan1.Zanr.Zanr);
-			sadrzaj[i][7] = String.valueOf(Clan1.oznaka);
-			sadrzaj[i][8] = String.valueOf(Clan1.obrisan);
 		}
 		
 		tableModel = new DefaultTableModel(sadrzaj, zaglavlja);

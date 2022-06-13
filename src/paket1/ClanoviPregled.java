@@ -3,6 +3,7 @@ package paket1;
 import java.awt.BorderLayout;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -69,6 +70,36 @@ public class ClanoviPregled extends JFrame {
 		});
 		
 		mainToolbar.add(btnEdit);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int red = ttt.getSelectedRow();
+				if(red == -1) {
+					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
+				}else {
+					int ID = Integer.valueOf((String) tableModel.getValueAt(red, 4));
+					
+					for(int i =0;i < metode.cc.size();i++)
+					{
+						Clan pera = metode.cc.get(i);
+						if(pera.BrojCK == ID)
+						{
+							pera.Obrisan = true;
+							
+							try {
+								metode.upisiSVE();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							JOptionPane.showMessageDialog(null, "User Deleted");
+						}
+					}
+	
+					
+					
+				}
+			}
+		});
 		
 		mainToolbar.add(btnNewButton);
 		mainToolbar.add(btnDelete);
@@ -77,11 +108,20 @@ public class ClanoviPregled extends JFrame {
 		mainToolbar.add(btnNewButton_1);
 	
 	
+		ArrayList<Clan> kk = new ArrayList<>();
+		for(int i = 0;i < metode.cc.size();i++)
+		{
+			Clan temp = metode.cc.get(i);
+			if (temp.Obrisan == false)
+					{
+						kk.add(temp);
+					}
+		}
 		String[] zaglavlja = new String[] {"Name", "Surname", "Adress","Gender","Card number","Number of paid months","date of last payment","Membership Type","Active","Deleted"};
-		Object[][] sadrzaj = new Object[metode.cc.size()][zaglavlja.length];
+		Object[][] sadrzaj = new Object[kk.size()][zaglavlja.length];
 		
-		for(int i=0; i<metode.cc.size(); i++) {
-			Clan Clan1 = metode.cc.get(i);
+		for(int i=0; i<kk.size(); i++) {
+			Clan Clan1 = kk.get(i);
 			sadrzaj[i][0] = Clan1.Ime;
 			sadrzaj[i][1] = Clan1.Prezime;
 			sadrzaj[i][2] = Clan1.Adresa;

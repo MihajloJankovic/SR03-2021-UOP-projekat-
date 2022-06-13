@@ -13,7 +13,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
-public class noviP {
+public class Primerake {
 	 Knjiga temp = null;
 
 	
@@ -28,7 +28,7 @@ public class noviP {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					noviP window = new noviP(jo);
+					Primerake window = new Primerake(jo);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,11 +40,14 @@ public class noviP {
 	/**
 	 * Create the application.
 	 */
-	public noviP(Knjiga jo) {
-		initialize();
+	
+	public Primerake(Primerak jo) {
 		this.jo = jo;
+		initialize();
+		
+		
 	}
-	protected static Knjiga jo;
+	public static Primerak jo;
 
 	
 
@@ -112,33 +115,79 @@ public class noviP {
 		btnNewButton_1.setBounds(196, 413, 134, 36);
 		frame.getContentPane().add(btnNewButton_1);
 		
+		String[] z = {"true","false"};
+		JComboBox comboBox_2 = new JComboBox(z);
+		comboBox_2.setBounds(289, 49, 141, 37);
+		frame.getContentPane().add(comboBox_2);
 		
-		String[] arr = {"true", "false"};
+		JLabel lblNewLabel_3 = new JLabel("Rented :");
+		lblNewLabel_3.setBounds(154, 46, 97, 43);
+		frame.getContentPane().add(lblNewLabel_3);
+		
+		if(jo.TipPoveza == true)
+		{
+			comboBox.setSelectedItem(String.valueOf("hard"));
+		}
+		if(jo.TipPoveza == false)
+		{
+			comboBox.setSelectedItem(String.valueOf("soft"));
+		}
+		switch(String.valueOf(jo.JezikStampanja))
+		{
+		case "SRPSKI": comboBox_1.setSelectedItem("Serbian");break;
+		case "ENGLESKI":comboBox_1.setSelectedItem("English");break;
+		case "NEMACKI":comboBox_1.setSelectedItem("German");break;
+		case "FRANCUSKI":comboBox_1.setSelectedItem("France");break;
+		case "RUSKI":comboBox_1.setSelectedItem("Russian");break;
+		}
+		if(jo.Iznajmljena == true)
+		{
+			comboBox_2.setSelectedItem("true");
+		}
+		if(jo.Iznajmljena == false)
+		{
+			comboBox_2.setSelectedItem("false");
+		}
+		
+		textField_2.setText(String.valueOf(jo.BrojStrana));
+		textField_3.setText(String.valueOf(jo.GodinaStampanja));
+		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String povez =String.valueOf(comboBox.getSelectedItem());
 				String jezik =String.valueOf(comboBox_1.getSelectedItem());
-				
+				String izn =String.valueOf(comboBox_2.getSelectedItem());
 				String brojstr =String.valueOf(textField_2.getText());
 				String godina =String.valueOf(textField_3.getText());
 				if(isNumeric(godina)==true)
 				{
 					if(isNumeric(brojstr)==true)
 					{
-						int temp = 0;
+						Jezik temp= null;
 						switch(jezik)
 						{
-						case "Serbian": temp=1;break;
-						case "English": temp=2;break;
-						case "France": temp=3;break;
-						case "German": temp=4;break;
-						case "Russian": temp=5;break;
+						case "Serbian": temp = Jezik.SRPSKI;break;
+						case "English":temp = Jezik.ENGLESKI;break;
+						case "German":temp = Jezik.NEMACKI;break;
+						case "France":temp = Jezik.FRANCUSKI;break;
+						case "Russian":temp = Jezik.RUSKI;break;
 						}
 					
 						try {
-							JOptionPane.showMessageDialog(null, "ADDED.", "Error", JOptionPane.WARNING_MESSAGE);
-							metode.NoviPrimerak(Integer.valueOf(jo.oznaka), Integer.valueOf(brojstr), Boolean.valueOf(povez), Integer.valueOf(godina), temp, false);
+							JOptionPane.showMessageDialog(null, "EDITED.", "Error", JOptionPane.WARNING_MESSAGE);
+							jo.BrojStrana = Integer.valueOf(brojstr);
+							jo.Iznajmljena = Boolean.valueOf(izn);
+							jo.GodinaStampanja = Integer.valueOf(godina);
+							if(povez == "hard")
+							{
+								jo.TipPoveza = true;
+							}
+							if(povez == "soft")
+							{
+								jo.TipPoveza = false;
+							}
+							jo.JezikStampanja = temp;
 							metode.upisiSVE();
 							frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 						} catch (NumberFormatException e1) {
@@ -164,5 +213,4 @@ public class noviP {
 		});
 		
 	}
-
 }

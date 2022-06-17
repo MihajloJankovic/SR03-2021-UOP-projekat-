@@ -191,6 +191,14 @@ public class Nam extends javax.swing.JFrame {
 		mnNewMenu_6.add(mntmNewMenuItem_11);
 		
 		JMenuItem mntmNewMenuItem_12 = new JMenuItem("Show List");
+		mntmNewMenuItem_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				iiz cppp1 = new iiz();
+				cppp1.setVisible(true);
+				
+			}
+		});
 		mnNewMenu_6.add(mntmNewMenuItem_12);
 		menuBar.add(mnNewMenu_2);
 		

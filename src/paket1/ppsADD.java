@@ -97,10 +97,13 @@ public class ppsADD {
 						JOptionPane.showMessageDialog(null, "ADDED");
 						try {
 							metode.upisiSVE();
+							
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+						
+					
 						frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 					}
 					else

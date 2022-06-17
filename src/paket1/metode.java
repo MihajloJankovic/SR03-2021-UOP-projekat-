@@ -54,6 +54,10 @@ public class metode {
 		  
 			br.close();
 	}
+	static void Novirzor()
+	{
+		
+	}
 	static void CitajTipoveC() throws IOException
 	{
 		  BufferedReader br = new BufferedReader(new FileReader("./src/paket1/TipoviClnarine.txt"));
@@ -568,7 +572,9 @@ public class metode {
 				  LocalDate Datumm = LocalDate.parse(datum, formatter);
 				  String datum2 = red[4];
 				  LocalDate dvracanja = LocalDate.parse(datum2, formatter);
-				  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,Datumm,dvracanja);
+				  Boolean obrisan = Boolean.valueOf(red[5]) ;
+				  int idd = Integer.valueOf(red[6]);
+				  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,Datumm,dvracanja,obrisan,idd);
 				  ii.add(t1);
 				  String [] red3 = red2.split("\\|");
 				  for (int i=0;i < red3.length;i++)
@@ -602,7 +608,9 @@ public class metode {
 				  LocalDate Datumm = LocalDate.parse(datum, formatter);
 				  String datum2 = red[4];
 				  LocalDate dvracanja = LocalDate.parse(datum2, formatter);
-				  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,Datumm,dvracanja);
+				  Boolean obrisan = Boolean.valueOf(red[5]) ;
+				  int idd = Integer.valueOf(red[6]);
+				  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,Datumm,dvracanja,obrisan,idd);
 				  ii.add(t1);
 				  String [] red3 = red2.split("\\|");
 				  for (int i=0;i < red3.length;i++)
@@ -626,7 +634,7 @@ public class metode {
 		
 	}
 	
-	static void NovoIznajmljivanje(int tip1,int zapo1,int clan1,ArrayList<Primerak> ppo)
+	static void NovoIznajmljivanje(int tip1,int zapo1,int clan1,ArrayList<Primerak> ppo) throws NumberFormatException, IOException
 	{	 
 		int zapo2 =0;
 		if(tip1==1)
@@ -643,7 +651,38 @@ public class metode {
 			  Clan clan11 = cc.get(clan1-1);
 		      LocalDate datumm = LocalDate.now();
 			  LocalDate dvracanja = datumm.plusMonths(3);
-			  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,datumm,dvracanja);
+			  FileInputStream fstream = new FileInputStream("./src/paket1/Settings1.txt");
+				BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+				 int brojiz=0;
+					int brojreda=1;
+				
+				String strLine;
+
+				//Read File Line By Line
+				while ((strLine = br.readLine()) != null)   {
+					if(brojreda==1)
+					{
+						brojiz=Integer.parseInt(strLine)+1;
+					}
+					
+				
+				  brojreda=brojreda+1;
+				 
+				}
+				
+				
+				//Close the input stream
+				fstream.close();
+				
+				
+				BufferedWriter myWriter1= new BufferedWriter(new FileWriter("./src/paket1/Settings1.txt"));
+			    //FileWriter myWriter = new FileWriter("./src/paket1/Clanovi.txt");
+			    myWriter1.append(String.valueOf(brojiz)+"\n");
+			 
+			    myWriter1.close();
+			    System.out.println("uspesno promenjen settings1");
+
+			  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,datumm,dvracanja,false,brojiz);
 			  ii.add(t1);
 			  for(int i =0;i < ppo.size();i++)
 			  {
@@ -665,7 +704,38 @@ public class metode {
 			  Clan clan11 = cc.get(clan1-1);
 		      LocalDate datumm = LocalDate.now();
 			  LocalDate dvracanja = datumm.plusMonths(3);
-			  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,datumm,dvracanja);
+			  FileInputStream fstream = new FileInputStream("./src/paket1/Settings1.txt");
+				BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+				 int brojiz=0;
+					int brojreda=1;
+				
+				String strLine;
+
+				//Read File Line By Line
+				while ((strLine = br.readLine()) != null)   {
+					if(brojreda==1)
+					{
+						brojiz=Integer.parseInt(strLine)+1;
+					}
+					
+				
+				  brojreda=brojreda+1;
+				 
+				}
+				
+				
+				//Close the input stream
+				fstream.close();
+				
+				
+				BufferedWriter myWriter1= new BufferedWriter(new FileWriter("./src/paket1/Settings1.txt"));
+			    //FileWriter myWriter = new FileWriter("./src/paket1/Clanovi.txt");
+			    myWriter1.append(String.valueOf(brojiz)+"\n");
+			 
+			    myWriter1.close();
+			    System.out.println("uspesno promenjen settings1");
+
+			  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,datumm,dvracanja,false,brojiz);
 			  ii.add(t1);
 			  for(int i =0;i < ppo.size();i++)
 			  {
@@ -738,7 +808,7 @@ public class metode {
 			Iznajmljivanje i1 = ii.get(i);
 			BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Iznaj.txt", true));
 		    
-			 myWriter.append(String.valueOf(i1.tip)+"|"+String.valueOf(i1.zaposleni)+"|"+String.valueOf(i1.clan.BrojCK)+"|"+String.valueOf(i1.DatumIznamljivanja)+"|"+String.valueOf(i1.DatumVracanja)+"#");
+			 myWriter.append(String.valueOf(i1.tip)+"|"+String.valueOf(i1.zaposleni)+"|"+String.valueOf(i1.clan.BrojCK)+"|"+String.valueOf(i1.DatumIznamljivanja)+"|"+String.valueOf(i1.DatumVracanja)+"|"+String.valueOf(i1.obrisaan)+"|"+String.valueOf(i1.oznaka)+"#");
 			 for(int i2=0; i2 < metode.zanr.size();i2++)
 			 {
 				 myWriter.append(String.valueOf(i1.ppo.get(i2).oznaka)+"|");

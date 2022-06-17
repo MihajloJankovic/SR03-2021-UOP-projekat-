@@ -12,7 +12,7 @@ import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
 
-public class ppsEDIT {
+class ppsEDIT {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -38,11 +38,13 @@ public class ppsEDIT {
 	 * Create the application.
 	 */
 	public ppsEDIT(TipClanarine temp) {
+		
 		this.jo = temp;
+	
 		initialize();
 	}
 	protected static TipClanarine jo;
-
+	private static ppsEDIT jo1;
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -96,13 +98,18 @@ public class ppsEDIT {
 						jo.cena = cena1;
 						try {
 							metode.upisiSVE();
+						
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 						JOptionPane.showMessageDialog(null, "SAVED");
 						
-						
+					
+						getJo1().frame.setVisible(false);
+						getJo1().frame.dispose(); 
+						pps gg = new pps();
+						gg.setVisible(true);
 						frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 					}
 					else
@@ -118,5 +125,13 @@ public class ppsEDIT {
 		});
 		btnNewButton.setBounds(150, 198, 113, 31);
 		frame.getContentPane().add(btnNewButton);
+	}
+
+	public static ppsEDIT getJo1() {
+		return jo1;
+	}
+
+	public static void setJo1(ppsEDIT jo1) {
+		ppsEDIT.jo1 = jo1;
 	}
 }

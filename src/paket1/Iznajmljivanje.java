@@ -20,6 +20,10 @@ public class Iznajmljivanje {
     	
     	
     }
+    public Iznajmljivanje()
+    {
+    	this.clan = null;
+    }
   
 
     /**

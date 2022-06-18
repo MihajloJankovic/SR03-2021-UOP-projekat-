@@ -3,7 +3,6 @@ package paket1;
 import java.awt.BorderLayout;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -24,7 +23,7 @@ import java.awt.event.ActionEvent;
 
 
 
-public class izzBA extends JFrame {
+public class izzadd extends JFrame {
 
 	/**
 	 * 
@@ -36,12 +35,12 @@ public class izzBA extends JFrame {
 	
 	private DefaultTableModel tableModel;
 	private JTable kompozicijeTabela;
-	private final JButton btnNewButton_1 = new JButton("Delete");
+	private final JButton btnNewButton = new JButton("Add");
 	
-	public izzBA(Iznajmljivanje temp) {
+	public izzadd(Iznajmljivanje temp) {
 		this.jo = temp;
-		
-		setTitle("Chose");
+		setVisible(true);
+		setTitle("Adminstrators");
 		setSize(500, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -49,59 +48,35 @@ public class izzBA extends JFrame {
 		initActions();
 	}
 	protected Iznajmljivanje jo;
-	private final JButton btnNewButton = new JButton("Add");
 	private void initGUI() {
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		mainToolbar.add(btnNewButton);
 		
 		
 		
 		mainToolbar.add(btnEdit);
+	
+		
+		mainToolbar.add(btnNewButton);
 		mainToolbar.add(btnDelete);
 		getContentPane().add(mainToolbar, BorderLayout.NORTH);
 	
-		
-		mainToolbar.add(btnNewButton_1);
-	
-		
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int red = kompozicijeTabela.getSelectedRow();
-				if(red == -1) {
-					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
-				}else {
-					String ID = (String) tableModel.getValueAt(red, 6);
-					int iz = Integer.parseInt(ID);
-					for(int i=0 ;i<jo.ppo.size();i++)
-					{
-						Primerak temp = jo.ppo.get(i);
-						if(temp.oznaka == iz )
-						{
-							jo.ppo.remove(temp);
-							JOptionPane.showMessageDialog(null, "DELETED");
-							try {
-								metode.upisiSVE();
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}						}
-					}
-	
-					
-					
-				}
+		ArrayList<Primerak> pp = new ArrayList<>();
+		for(int i =0; i < metode.pp.size();i++)
+		{
+			if(metode.pp.get(i).obrisan != true)
+			{
+			
+				
+					pp.add(metode.pp.get(i));
+				
 			}
-		});
+			
+		}
 		String[] zaglavlja = new String[] {"Book", "Connection type", "Year printed","Number of pages","Language of printing","rented","ID"};
-		Object[][] sadrzaj = new Object[jo.ppo.size()][zaglavlja.length];
+		Object[][] sadrzaj = new Object[pp.size()][zaglavlja.length];
 		
 		
-		for(int i=0; i<jo.ppo.size(); i++) {
-			Primerak Clan1 = jo.ppo.get(i);
+		for(int i=0; i<pp.size(); i++) {
+			Primerak Clan1 = pp.get(i);
 			
 			
 		
@@ -138,6 +113,39 @@ public class izzBA extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane(kompozicijeTabela);
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
+		
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int red = kompozicijeTabela.getSelectedRow();
+				if(red == -1) {
+					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
+				}else {
+					String ID = (String) tableModel.getValueAt(red, 6);
+					int iz = Integer.parseInt(ID);
+					for(int i=0 ;i<metode.pp.size();i++)
+					{
+						Primerak temp = metode.pp.get(i);
+						if(temp.oznaka==iz)
+						{
+							if(jo.ppo.contains(temp)==false)
+							{
+								jo.ppo.add(temp);
+								JOptionPane.showMessageDialog(null, "ADDED", "Error", JOptionPane.WARNING_MESSAGE);
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(null, "You already have this book added.", "Error", JOptionPane.WARNING_MESSAGE);
+							}
+						}
+					}
+	
+					
+					
+				}
+				
+			}
+		});
 	}
 	
 	private void initActions() {}

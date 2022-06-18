@@ -24,7 +24,7 @@ import java.awt.event.ActionEvent;
 
 
 
-public class izzBA extends JFrame {
+public class izzshow extends JFrame {
 
 	/**
 	 * 
@@ -36,12 +36,13 @@ public class izzBA extends JFrame {
 	
 	private DefaultTableModel tableModel;
 	private JTable kompozicijeTabela;
-	private final JButton btnNewButton_1 = new JButton("Delete");
+	private final JButton btnNewButton = new JButton("Add");
 	
-	public izzBA(Iznajmljivanje temp) {
+	public izzshow(Iznajmljivanje temp) {
 		this.jo = temp;
 		
-		setTitle("Chose");
+		setVisible(true);
+		setTitle("Adminstrators");
 		setSize(500, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
@@ -49,27 +50,20 @@ public class izzBA extends JFrame {
 		initActions();
 	}
 	protected Iznajmljivanje jo;
-	private final JButton btnNewButton = new JButton("Add");
+	private final JButton btnNewButton_1 = new JButton("Delete");
 	private void initGUI() {
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		mainToolbar.add(btnNewButton);
 		
 		
 		
 		mainToolbar.add(btnEdit);
+	
+		
+		mainToolbar.add(btnNewButton);
 		mainToolbar.add(btnDelete);
 		getContentPane().add(mainToolbar, BorderLayout.NORTH);
-	
-		
-		mainToolbar.add(btnNewButton_1);
-	
-		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				int red = kompozicijeTabela.getSelectedRow();
 				if(red == -1) {
 					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
@@ -94,14 +88,30 @@ public class izzBA extends JFrame {
 					
 					
 				}
+				
 			}
 		});
+		
+		mainToolbar.add(btnNewButton_1);
+	
+		ArrayList<Primerak> pp = new ArrayList<>();
+		for(int i =0; i < jo.ppo.size();i++)
+		{
+			
+			
+			
+				
+					pp.add(jo.ppo.get(i));
+				
+			
+			
+		}
 		String[] zaglavlja = new String[] {"Book", "Connection type", "Year printed","Number of pages","Language of printing","rented","ID"};
-		Object[][] sadrzaj = new Object[jo.ppo.size()][zaglavlja.length];
+		Object[][] sadrzaj = new Object[pp.size()][zaglavlja.length];
 		
 		
-		for(int i=0; i<jo.ppo.size(); i++) {
-			Primerak Clan1 = jo.ppo.get(i);
+		for(int i=0; i<pp.size(); i++) {
+			Primerak Clan1 = pp.get(i);
 			
 			
 		
@@ -138,6 +148,14 @@ public class izzBA extends JFrame {
 		
 		JScrollPane scrollPane = new JScrollPane(kompozicijeTabela);
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
+		
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			 izzadd d = new izzadd(jo);
+				
+			}
+		});
 	}
 	
 	private void initActions() {}

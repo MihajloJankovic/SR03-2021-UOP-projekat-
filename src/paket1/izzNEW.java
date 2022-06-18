@@ -5,11 +5,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
 
-public class izzEDIT {
+public class izzNEW {
 
 	private JFrame frame;
 
@@ -20,7 +21,7 @@ public class izzEDIT {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					izzEDIT window = new izzEDIT(jo);
+					izzNEW window = new izzNEW();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,18 +33,30 @@ public class izzEDIT {
 	/**
 	 * Create the application.
 	 */
-	public izzEDIT(Iznajmljivanje temp) {
+	public izzNEW() {
 		initialize();
-		this.jo = temp;
+		this.jo = new Iznajmljivanje();
 	}
  protected static Iznajmljivanje jo;
- private JTextField textField;
+ 
+	public static boolean isNumeric(String strNum) {
+	    if (strNum == null) {
+	        return false;
+	    }
+	    try {
+	        Integer d = Integer.valueOf(strNum);
+	    } catch (NumberFormatException nfe) {
+	        return false;
+	    }
+	    return true;
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 475, 314);
+		frame.setVisible(true);
+		frame.setBounds(100, 100, 510, 377);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
@@ -60,26 +73,48 @@ public class izzEDIT {
 		JButton btnNewButton_1 = new JButton("Chose");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				izzCLAN d = new izzCLAN(jo);
 			}
 		});
 		btnNewButton_1.setBounds(287, 183, 89, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JLabel lblNewLabel = new JLabel("Books:");
-		lblNewLabel.setBounds(138, 39, 113, 66);
+		lblNewLabel.setBounds(191, 39, 113, 66);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Cstomer :");
-		lblNewLabel_1.setBounds(138, 172, 121, 34);
+		lblNewLabel_1.setBounds(191, 177, 121, 34);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.setBounds(264, 125, 143, 23);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("Number of months for rent :");
-		lblNewLabel_2.setBounds(91, 116, 180, 41);
-		frame.getContentPane().add(lblNewLabel_2);
+		JButton btnNewButton_2 = new JButton("SAVE");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(metode.cc.contains(jo.clan))
+				{
+					if(jo.ppo.size()>0)
+					{
+						
+						
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Chose at least 1 book");
+					}
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Chose Customer");
+				}
+				
+				
+				
+				
+			}
+			
+		});
+		btnNewButton_2.setBounds(220, 270, 113, 41);
+		frame.getContentPane().add(btnNewButton_2);
 	}
 }

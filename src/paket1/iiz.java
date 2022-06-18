@@ -38,8 +38,7 @@ public class iiz extends JFrame {
 	private DefaultTableModel tableModel;
 	private JTable kompozicijeTabela;
 	private final JButton btnNewButton = new JButton("Delete");
-	private final JButton btnNewButton_1 = new JButton("Edit");
-	private final JButton btnNewButton_2 = new JButton("Copies");
+	private final JButton btnNewButton_2 = new JButton("Edit");
 	
 	public iiz() {
 		
@@ -63,14 +62,14 @@ public class iiz extends JFrame {
 				if(red == -1) {
 					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
 				}else {
-					String ID = (String) tableModel.getValueAt(red, 7);
+					String ID = (String) tableModel.getValueAt(red, 3);
 					int iz = Integer.parseInt(ID);
-					for(int i=0 ;i<metode.kk.size();i++)
+					for(int i=0 ;i<metode.ii.size();i++)
 					{
-						Knjiga temp = metode.kk.get(i);
+						Iznajmljivanje temp = metode.ii.get(i);
 						if(temp.oznaka==iz)
 						{
-							temp.obrisan = true;
+							temp.obrisaan = true;
 							try {
 								metode.upisiSVE();
 							} catch (IOException e1) {
@@ -91,31 +90,6 @@ public class iiz extends JFrame {
 		mainToolbar.add(btnNewButton);
 		mainToolbar.add(btnDelete);
 		getContentPane().add(mainToolbar, BorderLayout.NORTH);
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int red = kompozicijeTabela.getSelectedRow();
-				if(red == -1) {
-					JOptionPane.showMessageDialog(null, "Chose a row in a table first.", "Error", JOptionPane.WARNING_MESSAGE);
-				}else {
-					String ID = tableModel.getValueAt(red, 3).toString();
-					int iz = Integer.parseInt(ID);
-					for(int i=0 ;i<metode.kk.size();i++)
-					{
-						Knjiga temp = metode.kk.get(i);
-						if(temp.oznaka==iz)
-						{
-							kf df = new kf(temp);
-						}
-					}
-	
-					
-					
-				}
-				
-			}
-		});
-		
-		mainToolbar.add(btnNewButton_1);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int red = kompozicijeTabela.getSelectedRow();

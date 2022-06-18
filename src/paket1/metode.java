@@ -634,7 +634,7 @@ public class metode {
 		
 	}
 	
-	static void NovoIznajmljivanje(int tip1,int zapo1,int clan1,ArrayList<Primerak> ppo) throws NumberFormatException, IOException
+	static void NovoIznajmljivanje(int tip1,int zapo1,int clan1,ArrayList<Primerak> ppo,int t) throws NumberFormatException, IOException
 	{	 
 		int zapo2 =0;
 		if(tip1==1)
@@ -650,7 +650,7 @@ public class metode {
 			  int zapo = zapo2;
 			  Clan clan11 = cc.get(clan1-1);
 		      LocalDate datumm = LocalDate.now();
-			  LocalDate dvracanja = datumm.plusMonths(3);
+			  LocalDate dvracanja = datumm.plusMonths(t);
 			  FileInputStream fstream = new FileInputStream("./src/paket1/Settings1.txt");
 				BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 				 int brojiz=0;

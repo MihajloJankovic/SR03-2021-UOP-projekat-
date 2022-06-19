@@ -40,7 +40,7 @@ public class izzBA extends JFrame {
 	
 	public izzBA(Iznajmljivanje temp) {
 		this.jo = temp;
-		
+		setVisible(true);
 		setTitle("Chose");
 		setSize(500, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -81,6 +81,7 @@ public class izzBA extends JFrame {
 						Primerak temp = jo.ppo.get(i);
 						if(temp.oznaka == iz )
 						{
+							temp.Iznajmljena = false;
 							jo.ppo.remove(temp);
 							JOptionPane.showMessageDialog(null, "DELETED");
 							try {

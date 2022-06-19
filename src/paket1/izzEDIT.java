@@ -5,7 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
@@ -37,14 +40,25 @@ public class izzEDIT {
 		this.jo = temp;
 	}
  protected static Iznajmljivanje jo;
- private JTextField textField;
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	public static boolean isNumeric(String strNum) {
+	    if (strNum == null) {
+	        return false;
+	    }
+	    try {
+	        Integer d = Integer.valueOf(strNum);
+	    } catch (NumberFormatException nfe) {
+	        return false;
+	    }
+	    return true;
+	}
 	private void initialize() {
 		frame = new JFrame();
+		frame.setVisible(true);
 		frame.setBounds(100, 100, 475, 314);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("Chose");
@@ -62,7 +76,7 @@ public class izzEDIT {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_1.setBounds(287, 183, 89, 23);
+		btnNewButton_1.setBounds(287, 143, 89, 23);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JLabel lblNewLabel = new JLabel("Books:");
@@ -70,16 +84,51 @@ public class izzEDIT {
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Cstomer :");
-		lblNewLabel_1.setBounds(138, 172, 121, 34);
+		lblNewLabel_1.setBounds(138, 137, 121, 34);
 		frame.getContentPane().add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.setBounds(264, 125, 143, 23);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("Number of months for rent :");
-		lblNewLabel_2.setBounds(91, 116, 180, 41);
-		frame.getContentPane().add(lblNewLabel_2);
+		JButton btnNewButton_2 = new JButton("SAVE");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(metode.cc.contains(jo.clan))
+				{
+					if(jo.ppo.size()>0)
+					{
+						
+						
+							
+							 for( int i=0; i < jo.ppo.size();i++)
+							  {
+								  jo.ppo.get(i).Iznajmljena = true;
+								  
+							  }
+							 JOptionPane.showMessageDialog(null, "EDITED");
+							try {
+							
+								metode.upisiSVE();
+							} catch (NumberFormatException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						
+						
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Chose at least 1 book");
+					}
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Chose Customer");
+				}
+				
+			}
+		});
+		btnNewButton_2.setBounds(182, 241, 89, 23);
+		frame.getContentPane().add(btnNewButton_2);
 	}
 }

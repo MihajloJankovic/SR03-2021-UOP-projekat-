@@ -38,11 +38,12 @@ public class izzCLAN extends JFrame {
 	
 	private DefaultTableModel tableModel;
 	private JTable ttt;
-	private final JButton btnNewButton = new JButton("Delete");
+	private final JButton btnNewButton = new JButton("Pick");
 	
 	public izzCLAN(Iznajmljivanje temp) {
 		
 		this.jo = temp;
+		setVisible(true);
 		setTitle("Clanovi");
 		setSize(500, 300);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

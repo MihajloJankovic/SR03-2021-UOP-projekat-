@@ -184,6 +184,7 @@ public class AddClan extends JFrame {
 										pera = temp;
 									}
 								}
+								JOptionPane.showMessageDialog(null, "ADDED");
 								try {
 									metode.NoviClan(ime1, Prezime, Adresa, pol1,pera, d);
 								} catch (IOException e2) {

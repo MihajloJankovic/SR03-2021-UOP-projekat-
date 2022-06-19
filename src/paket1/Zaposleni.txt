@@ -46,8 +46,9 @@ rgwshgwhr|hshsrhrs|hrshsrhrs|true|22222.0|fgagd|dagadgadg|0|91|false
 ywryh|rwhwshshr|shrshsh|true|22222.0|gadgdag|dagdagag|0|93|false
 ywryh|rwhwshshr|shrshsh|true|22222.0|gadgdag|dagdagag|0|94|false
 ywryh|rwhwshshr|shrshsh|true|22222.0|gadgdag|dagdagag|0|95|false
-mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|1|2|false
-mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|1|4|false
+gadga|gdagadg|agadgadga|true|33333.0|geagea|dgeagea|0|97|false
+mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|1|2|true
+ggggggggggg|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|1|4|false
 sfhg|hfshsfh|hfshsh|false|1111.0|ssss|ssss|1|6|false
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|1|8|false
 mIKA|Antic|mAJKE JEVROSIME 2|false|50000.0|JOVANA2|SifraSifra|1|10|false

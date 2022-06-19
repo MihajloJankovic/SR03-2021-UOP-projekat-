@@ -209,26 +209,49 @@ public class Nam extends javax.swing.JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem mntmNewMenuItem_13 = new JMenuItem("Edit Info");
+		mntmNewMenuItem_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				bf cppp1 = new bf();
+				
+			}
+		});
 		mnNewMenu_2.add(mntmNewMenuItem_13);
 		SpringLayout springLayout = new SpringLayout();
 		getContentPane().setLayout(springLayout);
 		
+		
+		JButton btnNewButton = new JButton("Register Admin");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Addz cpp = new Addz(1);
+			
+			}
+		});
 		JButton btnNewButton_1 = new JButton("Login");
 		menuBar.hide();
+		if(metode.aa.size()==0)
+		{
+			btnNewButton.show();
+		}
+		else
+		{
+			btnNewButton.hide();
+		}
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoginDialog loginDlg = new LoginDialog(null);
                 loginDlg.setVisible(true);
                 if(loginDlg.isSucceeded()){
                 	btnNewButton_1.hide();
-                	menuBar.show();   
+                	btnNewButton.hide();
+                	 
                 	for(int i = 0 ;i< metode.aa.size();i++)
             		{
             			Administrator Z1 = metode.aa.get(i);
             			
             			if (Z1.oznaka == metode.templogin) {
             				showAInter();
-            				
+            				menuBar.show();  
             	        }
             			    
             			
@@ -265,6 +288,11 @@ public class Nam extends javax.swing.JFrame {
 		springLayout.putConstraint(SpringLayout.EAST, btnNewButton_1, -392, SpringLayout.EAST, getContentPane());
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		getContentPane().add(btnNewButton_1);
+		
+		
+		springLayout.putConstraint(SpringLayout.NORTH, btnNewButton, 33, SpringLayout.NORTH, getContentPane());
+		springLayout.putConstraint(SpringLayout.EAST, btnNewButton, -52, SpringLayout.EAST, getContentPane());
+		getContentPane().add(btnNewButton);
         initComponents();
     }
 

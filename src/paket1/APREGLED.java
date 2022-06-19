@@ -3,6 +3,7 @@ package paket1;
 import java.awt.BorderLayout;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -67,6 +68,12 @@ public class APREGLED extends JFrame {
 						if(temp.oznaka==iz)
 						{
 							temp.obrisan = true;
+							try {
+								metode.upisiSVE();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							JOptionPane.showMessageDialog(null, "User Deleted.");
 						}
 					}
@@ -107,11 +114,19 @@ public class APREGLED extends JFrame {
 		mainToolbar.add(btnNewButton_1);
 	
 	
+		ArrayList<Administrator> aa = new ArrayList<>();
+		for(int i =0;i<metode.aa.size();i++)
+		{
+			if(metode.aa.get(i).obrisan!= true)
+			{
+				aa.add(metode.aa.get(i));
+			}
+		}
 		String[] zaglavlja = new String[] {"Name", "Surname", "Adress","Gender","UserName","Password","Salary","ID","DELETED"};
-		Object[][] sadrzaj = new Object[metode.cc.size()][zaglavlja.length];
+		Object[][] sadrzaj = new Object[aa.size()][zaglavlja.length];
 		
-		for(int i=0; i<metode.aa.size(); i++) {
-			Administrator Clan1 = metode.aa.get(i);
+		for(int i=0; i< aa.size(); i++) {
+			Administrator Clan1 = aa.get(i);
 			sadrzaj[i][0] = Clan1.Ime;
 			sadrzaj[i][1] = Clan1.Prezime;
 			sadrzaj[i][2] = Clan1.Adresa;

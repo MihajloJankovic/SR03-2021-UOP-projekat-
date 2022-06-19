@@ -8,7 +8,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class izzNEW {
 
@@ -38,6 +40,7 @@ public class izzNEW {
 		this.jo = new Iznajmljivanje();
 	}
  protected static Iznajmljivanje jo;
+ private JTextField textField;
  
 	public static boolean isNumeric(String strNum) {
 	    if (strNum == null) {
@@ -53,11 +56,12 @@ public class izzNEW {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	
 	private void initialize() {
 		frame = new JFrame();
 		frame.setVisible(true);
 		frame.setBounds(100, 100, 510, 377);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JButton btnNewButton = new JButton("Chose");
@@ -80,11 +84,16 @@ public class izzNEW {
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JLabel lblNewLabel = new JLabel("Books:");
-		lblNewLabel.setBounds(191, 39, 113, 66);
+		lblNewLabel.setBounds(136, 39, 113, 66);
 		frame.getContentPane().add(lblNewLabel);
 		
+		textField = new JTextField();
+		textField.setBounds(245, 116, 181, 34);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
+		
 		JLabel lblNewLabel_1 = new JLabel("Cstomer :");
-		lblNewLabel_1.setBounds(191, 177, 121, 34);
+		lblNewLabel_1.setBounds(136, 177, 121, 34);
 		frame.getContentPane().add(lblNewLabel_1);
 		
 		JButton btnNewButton_2 = new JButton("SAVE");
@@ -95,8 +104,47 @@ public class izzNEW {
 				{
 					if(jo.ppo.size()>0)
 					{
-						
-						
+						if(isNumeric(textField.getText())==true)
+						{
+							int tip =0;
+							int broj = Integer.parseInt(textField.getText());
+							 for( int i=0; i < metode.aa.size();i++)
+							  {
+								  if(metode.aa.get(i).oznaka == metode.templogin )
+								  {
+									 tip=1;
+								  }
+								  
+							  }
+							 for( int i=0; i < metode.bb.size();i++)
+							  {
+								  if(metode.bb.get(i).oznaka == metode.templogin )
+								  {
+									 tip=0;
+								  }
+								  
+							  }
+							 for( int i=0; i < jo.ppo.size();i++)
+							  {
+								  jo.ppo.get(i).Iznajmljena = true;
+								  
+							  }
+							 
+							try {
+								metode.NovoIznajmljivanje(tip,metode.templogin,jo.clan,jo.ppo,broj);
+								metode.upisiSVE();
+							} catch (NumberFormatException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "Number of months is not numeric.");
+						}
 					}
 					else
 					{
@@ -116,5 +164,10 @@ public class izzNEW {
 		});
 		btnNewButton_2.setBounds(220, 270, 113, 41);
 		frame.getContentPane().add(btnNewButton_2);
+		
+		
+		JLabel lblNewLabel_2 = new JLabel("Number of months for rent : ");
+		lblNewLabel_2.setBounds(88, 121, 181, 24);
+		frame.getContentPane().add(lblNewLabel_2);
 	}
 }

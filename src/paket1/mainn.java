@@ -15,10 +15,12 @@ public class mainn {
 		metode.CitajPrimerke();
 		metode.CitajZaposlene();
 		metode.citajiznajmljivanje();
+		metode.citajbiblioteku();
 		//Citanej iz fajla i konstuisanje objekata.
 		
 		
-		
+		Nam d = new Nam();
+		d.setVisible(true);
 		
 
 	

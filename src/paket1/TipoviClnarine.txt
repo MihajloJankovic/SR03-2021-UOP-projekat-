@@ -1,5 +1,5 @@
 lgb1|100.0|true
-gadga|444.0222|false
+gadga|444.0222|true
 igb11|2000.0|false
 perica|1111.0|false
 dfddd|222.0|false

@@ -23,6 +23,7 @@ public class metode {
 	static ArrayList<Iznajmljivanje> ii = new ArrayList<>();
 	static ArrayList<Zanr> zanr = new ArrayList<>();
 	static ArrayList<TipClanarine> tc = new ArrayList<>();
+	static Biblioteka bba ;
 	static int templogin =0;
 	static void pss()
 	{
@@ -31,6 +32,24 @@ public class metode {
 	static void noviZanr(String ime)
 	{
 		zanr.add(new Zanr(ime));
+	}
+	static void citajbiblioteku() throws NumberFormatException, IOException
+	{
+		BufferedReader br = new BufferedReader(new FileReader("./src/paket1/BB.txt"));
+
+		  // Declaring a string variable
+		  String st;
+		  // Condition holds true till
+		  // there is character in a string
+		  while ((st = br.readLine()) != null) {
+
+			  String [] red = st.split("\\|");
+			 Biblioteka temp= new Biblioteka(red[0],red[1],red[2],Integer.valueOf(red[3]),Integer.valueOf(red[4]));
+			 bba= temp;
+			  
+		}
+		  
+			br.close();
 	}
 	static void noviTipClanarine(String ime,double cena)
 	{
@@ -550,9 +569,11 @@ public class metode {
 		  // there is character in a string
 		  while ((st = br.readLine()) != null) {
 
-			  String [] red1 = st.split("\\#");
+			  String [] red1 = st.split(" ");
 			  String red2 = red1[0];
 			  String pr = red1[1];
+			  System.out.print(red1[1]);
+			
 			  String [] red = red2.split("\\|");
 			  
 			  int tip1 = Integer.parseInt(red[0]);
@@ -576,7 +597,7 @@ public class metode {
 				  int idd = Integer.valueOf(red[6]);
 				  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,Datumm,dvracanja,obrisan,idd);
 				  ii.add(t1);
-				  String [] red3 = red2.split("\\|");
+				  String [] red3 = pr.split("\\|");
 				  for (int i=0;i < red3.length;i++)
 				  {
 					  int broj = Integer.parseInt(red3[i]);
@@ -612,7 +633,7 @@ public class metode {
 				  int idd = Integer.valueOf(red[6]);
 				  Iznajmljivanje t1 = new Iznajmljivanje(tip1,zapo,clan11,Datumm,dvracanja,obrisan,idd);
 				  ii.add(t1);
-				  String [] red3 = red2.split("\\|");
+				  String [] red3 = pr.split("\\|");
 				  for (int i=0;i < red3.length;i++)
 				  {
 					  int broj = Integer.parseInt(red3[i]);
@@ -634,7 +655,7 @@ public class metode {
 		
 	}
 	
-	static void NovoIznajmljivanje(int tip1,int zapo1,int clan1,ArrayList<Primerak> ppo,int t) throws NumberFormatException, IOException
+	static void NovoIznajmljivanje(int tip1,int zapo1,Clan clan1,ArrayList<Primerak> ppo,int t) throws NumberFormatException, IOException
 	{	 
 		int zapo2 =0;
 		if(tip1==1)
@@ -648,7 +669,7 @@ public class metode {
 				  
 			  }
 			  int zapo = zapo2;
-			  Clan clan11 = cc.get(clan1-1);
+			  Clan clan11 = clan1;
 		      LocalDate datumm = LocalDate.now();
 			  LocalDate dvracanja = datumm.plusMonths(t);
 			  FileInputStream fstream = new FileInputStream("./src/paket1/Settings1.txt");
@@ -701,7 +722,7 @@ public class metode {
 				  
 			  }
 			  int zapo = zapo2;
-			  Clan clan11 = cc.get(clan1-1);
+			  Clan clan11 = clan1;
 		      LocalDate datumm = LocalDate.now();
 			  LocalDate dvracanja = datumm.plusMonths(3);
 			  FileInputStream fstream = new FileInputStream("./src/paket1/Settings1.txt");
@@ -808,11 +829,12 @@ public class metode {
 			Iznajmljivanje i1 = ii.get(i);
 			BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/Iznaj.txt", true));
 		    
-			 myWriter.append(String.valueOf(i1.tip)+"|"+String.valueOf(i1.zaposleni)+"|"+String.valueOf(i1.clan.BrojCK)+"|"+String.valueOf(i1.DatumIznamljivanja)+"|"+String.valueOf(i1.DatumVracanja)+"|"+String.valueOf(i1.obrisaan)+"|"+String.valueOf(i1.oznaka)+"#");
-			 for(int i2=0; i2 < metode.zanr.size();i2++)
+			 myWriter.append(String.valueOf(i1.tip)+"|"+String.valueOf(i1.zaposleni)+"|"+String.valueOf(i1.clan.BrojCK)+"|"+String.valueOf(i1.DatumIznamljivanja)+"|"+String.valueOf(i1.DatumVracanja)+"|"+String.valueOf(i1.obrisaan)+"|"+String.valueOf(i1.oznaka)+" ");
+			 for(int i2=0; i2 < i1.ppo.size();i2++)
 			 {
 				 myWriter.append(String.valueOf(i1.ppo.get(i2).oznaka)+"|");
 			 }
+			 myWriter.append("\n");
 			 myWriter.close();
 			 System.out.println("Successfully wrote to the file.iznaj");
 			
@@ -873,8 +895,15 @@ public class metode {
 			    
 			
 		}	
-	
-	 
+		File file31 = new File("./src/paket1/BB.txt");
+		PrintWriter writer111111 = new PrintWriter(file31);
+		writer111111.print("");
+		writer111111.close();
+		
+		 BufferedWriter myWriter= new BufferedWriter(new FileWriter("./src/paket1/BB.txt", true));
+		    
+		    myWriter.append(bba.ime+"|"+bba.adresa+"|"+bba.broj+"|"+String.valueOf(bba.o)+"|"+String.valueOf(bba.z)+"\n");
+		    myWriter.close();
 		
 		
 		

@@ -134,26 +134,25 @@ public class iiz extends JFrame {
 			{
 				if(metode.aa.get(i1).oznaka== Clan1.zaposleni)
 				{
-					sadrzaj[i1][0] = String.valueOf(metode.aa.get(i1).oznaka) ;
+					sadrzaj[i][0] = String.valueOf(metode.aa.get(i1).Ime) ;
 				}
 			}
 			for(int i1 =0;i1< metode.bb.size();i1++)
 			{
 				if(metode.bb.get(i1).oznaka== Clan1.zaposleni)
 				{
-					sadrzaj[i1][0] = String.valueOf(metode.bb.get(i1).oznaka) ;
+					sadrzaj[i][0] = String.valueOf(metode.bb.get(i1).Ime) ;
 				}
 			}
 			
 			sadrzaj[i][1] =  String.valueOf(Clan1.clan.Ime);
-			StringBuilder str = new StringBuilder("");
-			for(int g = 0;g < Clan1.ppo.size();g++)
+			
+			String fan = "";
+			for(int i1 =0;i1<Clan1.ppo.size();i1++)
 			{
-				str.append(Clan1.ppo.get(g)+", ");
-				 
+				fan = fan+ Clan1.ppo.get(i1).Knjiga.Naslov+", ";
 			}
-			sadrzaj[i][1] = str;
-			sadrzaj[i][2] = String.valueOf(Clan1.ppo);
+			sadrzaj[i][2] = fan;
 			sadrzaj[i][3] = String.valueOf(Clan1.oznaka);
 		
 		}

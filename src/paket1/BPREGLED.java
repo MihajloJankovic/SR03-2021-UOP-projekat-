@@ -3,6 +3,7 @@ package paket1;
 import java.awt.BorderLayout;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -67,6 +68,12 @@ public class BPREGLED extends JFrame {
 						if(temp.oznaka==iz)
 						{
 							temp.obrisan = true;
+							try {
+								metode.upisiSVE();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
 							JOptionPane.showMessageDialog(null, "User Deleted.");
 						}
 					}
@@ -105,12 +112,20 @@ public class BPREGLED extends JFrame {
 		
 		mainToolbar.add(btnNewButton_1);
 	
-	
+		ArrayList<Bibliotekar> bb = new ArrayList<>();
+		for(int i =0;i<metode.bb.size();i++)
+		{
+			if(metode.bb.get(i).obrisan!= true)
+			{
+				bb.add(metode.bb.get(i));
+			}
+		}
 		String[] zaglavlja = new String[] {"Name", "Surname", "Adress","Gender","UserName","Password","Salary","ID","DELETED"};
-		Object[][] sadrzaj = new Object[metode.cc.size()][zaglavlja.length];
+		Object[][] sadrzaj = new Object[bb.size()][zaglavlja.length];
 		
-		for(int i=0; i<metode.bb.size(); i++) {
-			Bibliotekar Clan1 = metode.bb.get(i);
+		
+		for(int i=0; i<bb.size(); i++) {
+			Bibliotekar Clan1 = bb.get(i);
 			sadrzaj[i][0] = Clan1.Ime;
 			sadrzaj[i][1] = Clan1.Prezime;
 			sadrzaj[i][2] = Clan1.Adresa;

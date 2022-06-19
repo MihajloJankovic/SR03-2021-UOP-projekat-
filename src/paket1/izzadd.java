@@ -64,9 +64,12 @@ public class izzadd extends JFrame {
 		{
 			if(metode.pp.get(i).obrisan != true)
 			{
-			
-				
+				if(metode.pp.get(i).Iznajmljena==false)
+				{
 					pp.add(metode.pp.get(i));
+				}
+				
+				
 				
 			}
 			

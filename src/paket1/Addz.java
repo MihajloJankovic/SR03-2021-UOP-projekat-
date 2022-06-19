@@ -191,6 +191,7 @@ public class Addz extends JFrame {
 												}
 												if(broj ==1)
 												{
+													JOptionPane.showMessageDialog(null, "ADDED");
 													try {
 														metode.NoviZaposleni(ime1, Prezime, Adresa, pol1, d, Kkime, sifra,0);
 													} catch (IOException e1) {
@@ -200,6 +201,7 @@ public class Addz extends JFrame {
 												}
 												else
 												{
+													JOptionPane.showMessageDialog(null, "ADDED");
 													try {
 														metode.NoviZaposleni(ime1, Prezime, Adresa, pol1, d, Kkime, sifra,1);
 													} catch (IOException e1) {

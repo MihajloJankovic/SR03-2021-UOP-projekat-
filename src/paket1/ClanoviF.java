@@ -225,6 +225,7 @@ public class ClanoviF extends JFrame {
 										jo.TipClanarine = temp;
 									}
 								}
+								JOptionPane.showMessageDialog(null, "Edited");
 								try {
 									metode.upisiSVE();
 								} catch (IOException e1) {

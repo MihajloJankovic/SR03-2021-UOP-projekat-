@@ -261,6 +261,11 @@ public class Nam extends javax.swing.JFrame {
             			Bibliotekar Z1 = metode.bb.get(i);
             			if (Z1.oznaka == metode.templogin) {
             				showBInter();
+            				menuBar.show(); 
+            				mntmNewMenuItem.hide();  
+            				mnNewMenu_5.hide();   
+            				mnNewMenu_2.hide();
+            				mntmNewMenuItem_4.hide();
             	        }
             			
             		}
